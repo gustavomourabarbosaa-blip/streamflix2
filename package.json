@@ -1,0 +1,13 @@
+{
+  "name": "streamflix",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node inject-env.js",
+    "dev":   "node inject-env.js --watch",
+    "start": "node inject-env.js && npx serve dist"
+  },
+  "devDependencies": {
+    "serve": "^14.2.3"
+  }
+}

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#5e3f3b",
+                    "on-secondary": "#2f3131",
+                    "inverse-surface": "#e5e2e1",
+                    "on-background": "#e5e2e1",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "surface-container-low": "#1c1b1b",
+                    "error-container": "#93000a",
+                    "primary-container": "#e50914",
+                    "on-error": "#690005",
+                    "tertiary": "#c8c6c6",
+                    "surface-container": "#201f1f",
+                    "surface-container-high": "#2a2a2a",
+                    "inverse-primary": "#c0000c",
+                    "surface": "#131313",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "secondary-fixed": "#e2e2e2",
+                    "on-tertiary": "#303030",
+                    "on-primary-fixed": "#410001",
+                    "inverse-on-surface": "#313030",
+                    "primary": "#ffb4aa",
+                    "on-primary": "#690003",
+                    "surface-bright": "#393939",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-secondary-container": "#b4b5b5",
+                    "secondary-container": "#454747",
+                    "on-tertiary-container": "#fbf8f8",
+                    "surface-tint": "#ffb4aa",
+                    "primary-fixed": "#ffdad5",
+                    "on-primary-container": "#fff7f6",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-variant": "#353534",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed-variant": "#454747",
+                    "secondary": "#c6c6c7",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "tertiary-container": "#737272",
+                    "background": "#131313",
+                    "surface-dim": "#131313",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed": "#e4e2e2",
+                    "surface-container-highest": "#353534",
+                    "on-surface-variant": "#e9bcb6",
+                    "primary-fixed-dim": "#ffb4aa",
+                    "outline": "#af8782",
+                    "on-primary-fixed-variant": "#930007",
+                    "on-surface": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-gap-sm": "8px",
+                    "gutter": "12px",
+                    "edge-margin-desktop": "60px",
+                    "container-max": "1440px",
+                    "stack-gap-lg": "48px",
+                    "edge-margin-mobile": "16px",
+                    "edge-margin-tablet": "32px",
+                    "stack-gap-md": "24px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Montserrat"],
+                    "display-hero-mobile": ["Montserrat"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Montserrat"],
+                    "display-hero": ["Montserrat"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-hero-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "display-hero": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .scrim-hero {
+            background: linear-gradient(to top, #131313 0%, rgba(19, 19, 19, 0.7) 40%, transparent 100%);
+        }
+        .scrim-left {
+            background: linear-gradient(to right, #131313 0%, rgba(19, 19, 19, 0.4) 60%, transparent 100%);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; }
+        ::-webkit-scrollbar-thumb { background: #353534; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #e50914; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl transition-all duration-300">
+<div class="flex justify-between items-center w-full px-edge-margin-mobile md:px-edge-margin-desktop py-4">
+<div class="flex items-center gap-stack-gap-md">
+<span class="text-headline-md font-headline-md font-extrabold tracking-tighter text-primary-container">STREAMFLIX</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Home</a>
+<a class="text-on-surface border-b-2 border-primary-container pb-1 font-label-md text-label-md" href="#">Movies</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Series</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="#">My List</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface text-2xl hover:scale-110 transition-transform">search</button>
+<img alt="User Profile Avatar" class="w-8 h-8 rounded-full border border-surface-variant hover:scale-105 transition-transform cursor-pointer" data-alt="A professional high-resolution close-up portrait of a young man with a friendly expression. He has short dark hair and is set against a blurred, minimalist background. The lighting is soft and cinematic, with warm highlights that complement the deep black and vibrant red UI theme of the streaming platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCos7CNWfotSe4RSk59Hizy0pL9nbPKmB6bdqiBr8TwN5dPIxrEF2iFwdgyECGlATzIu5ZU2olkRDtCTk6xX577b_dsygIzM4qUhLrF5VsY9_RETQ19LF9QMDkFoGu4R4sktMhxVNLUgI0aC2byvIGPVJFFglW4cdCB7JyaWyXSSP3u6j1Kr9p5TQ2SpkQqA63fTYdAtoBdgq-Tw2vLvIZvGxaFXPlIxHZMsF-6kk22HC3sBeabtfNEa4sjxA5y_pDLp27crhCbuDs"/>
+</div>
+</div>
+</header>
+<main class="relative">
+<!-- Hero Section -->
+<section class="relative h-[870px] w-full overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Movie Hero Backdrop" class="w-full h-full object-cover" data-alt="A cinematic, wide-angle landscape shot of a futuristic cyberpunk city at night under a heavy rainstorm. Neon lights in vibrant crimson and electric blue reflect off wet asphalt streets. The atmosphere is moody, immersive, and high-contrast, featuring deep blacks and glowing accents that anchor the viewer into a theater-like streaming experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiNx7ESMy4lFstON9hX1gl-Ux9zQq6W_PmnR5L6F_YV3ttTW6Mjp7DrzrAjCnDEWiE-jPkfBc_tzh37lnX2Zzgef-ZCDuIaQGR7cxCGF_FK6H4QjPckV7OW-znCMoxE7qVlLpd8zWmvFXgjTErp3i0anQMThX1SXiDh5Nm10D-GwtLD9GbviJLvHXnkozu5O4AVVDA2wF340EWMC_C8rMdJTQglHXTRdJV5FwhuVdJZj73Zi28MuQ2gFh2B-pyqNUrAQqmyxqxxUo"/>
+<div class="absolute inset-0 scrim-hero"></div>
+<div class="absolute inset-0 scrim-left hidden md:block"></div>
+</div>
+<div class="relative z-10 h-full flex flex-col justify-end px-edge-margin-mobile md:px-edge-margin-desktop pb-stack-gap-lg max-w-container-max mx-auto">
+<div class="max-w-2xl space-y-stack-gap-md">
+<h1 class="font-display-hero text-display-hero md:text-display-hero uppercase tracking-tighter leading-tight">Interstellar II: O Retorno</h1>
+<div class="flex flex-wrap items-center gap-4">
+<span class="bg-surface-container-high text-on-tertiary-container px-3 py-1 rounded-lg text-label-md font-label-md">2024</span>
+<div class="flex items-center gap-1 text-primary-container">
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-on-surface font-label-md text-label-md">4.8/5</span>
+</div>
+<span class="text-on-surface-variant font-label-md text-label-md">2h 45min</span>
+<div class="flex gap-2">
+<span class="px-2 py-0.5 border border-surface-variant text-on-surface-variant rounded text-label-sm font-label-sm">Sci-Fi</span>
+<span class="px-2 py-0.5 border border-surface-variant text-on-surface-variant rounded text-label-sm font-label-sm">Drama</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-xl flex items-center gap-2 font-headline-md text-headline-md hover:brightness-125 transition-all active:scale-95 shadow-lg shadow-primary-container/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                            Assistir Agora
+                        </button>
+<button class="bg-white/20 backdrop-blur-md text-on-surface px-8 py-4 rounded-xl flex items-center gap-2 font-headline-md text-headline-md hover:bg-white/30 transition-all active:scale-95 border border-white/10">
+<span class="material-symbols-outlined">add</span>
+                            Adicionar à Minha Lista
+                        </button>
+</div>
+<p class="text-on-surface-variant font-body-lg text-body-lg leading-relaxed max-w-xl">
+                        Uma nova anomalia temporal ameaça a existência da humanidade, forçando uma equipe de exploradores a cruzar horizontes de eventos inexplorados. Uma jornada emocional que redefine as leis da física e do amor.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Cast Section -->
+<section class="px-edge-margin-mobile md:px-edge-margin-desktop py-stack-gap-lg max-w-container-max mx-auto overflow-hidden">
+<h2 class="font-headline-lg text-headline-lg mb-stack-gap-md">Elenco</h2>
+<div class="flex gap-gutter overflow-x-auto pb-4 no-scrollbar">
+<!-- Actor 1 -->
+<div class="flex-shrink-0 w-32 group cursor-pointer">
+<div class="w-32 h-32 rounded-full overflow-hidden border-2 border-transparent group-hover:border-primary-container transition-all mb-2">
+<img alt="Matthew McConaughey" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="A portrait of a male actor in his late 30s with light stubble and intense blue eyes. He is wearing a dark, textured sweater. The lighting is dramatic, falling from the side to create deep shadows and highlight facial features, consistent with a premium cinematic streaming service aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkHhumcV9L5txJCDH3NNBrUWq2IpMaRyVXW3FvTPoTNSM7pjoWQEb9s4MF5iRAALPvyUktrsrjjwqOLXCWN4596f1G_FlbtYFhVKKZa19ku66k6AohRmBP21Ci4V8WXYBCndvD6D1nimuPqNBx8661soDk84piNZzg2u0D7tLggZj8PaY2crDgIOTj8hN_6bHg4ogUDK2a6mz4qPA-GiAh3hRuDFO0mfp-XyK1VBfYCoEj4cxBnbPQfWO_0CljIVd9NMM7VcneJeA"/>
+</div>
+<p class="text-center font-label-md text-label-md text-on-surface">Matthew McConaughey</p>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant">Cooper</p>
+</div>
+<!-- Actor 2 -->
+<div class="flex-shrink-0 w-32 group cursor-pointer">
+<div class="w-32 h-32 rounded-full overflow-hidden border-2 border-transparent group-hover:border-primary-container transition-all mb-2">
+<img alt="Jessica Chastain" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="A high-fashion portrait of a female actress with a confident, serene expression. She has short red hair and striking features. The image uses a dark, monochromatic background to make the subject pop, following a high-end corporate modern and cinematic visual direction." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl1K1sUW3Ihf8Ad1iYsWu2DKIjVnRmUv3HqwCT0hxgu_s6EBsOoMfuRVQe17nhFYf_G-x4EnBkT8GOGQsFdd-zhBLZmmgAH53yYRmRnlNVPhYRsETYlUlEOkUeQDenIw72jamOI0B2FRO8B3_C2k3pQJdyokxnngd0Q8AnRDfmV0t0Fh1bGgzqoWmCbZYqIlP5PoGEM5Czie91KOyN867h6RrUxd3yZG_84_h6qXD5RM_ZZqX13CZ5abhsP8XnI9c8OAHIjfF2UWs"/>
+</div>
+<p class="text-center font-label-md text-label-md text-on-surface">Jessica Chastain</p>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant">Murph</p>
+</div>
+<!-- Actor 3 -->
+<div class="flex-shrink-0 w-32 group cursor-pointer">
+<div class="w-32 h-32 rounded-full overflow-hidden border-2 border-transparent group-hover:border-primary-container transition-all mb-2">
+<img alt="Michael Caine" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="A detailed headshot of a veteran male actor with distinguished gray hair and a calm, authoritative presence. The lighting is soft and even, highlighting a high-resolution cinematic texture in a dark, atmospheric studio setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB_N_PDF5RdO8jgW8Awf3FTo9Eix3-6MUAMvoydVnI6GnF7pw5UjdM0s45UbCJ3J7SHY0kWiGMEzlJOsctnNtzcOjH3z7DwLbMo2FktOM6Ss3o1MKxoa1TZto6IS2sP5TSFu08p-q1a8tF6SInEi57SURCVxKpR4WSqfGJijnuSEgiRX93-3Zuwl25QgrAezWmPfmRJ0VA4S-9l-uRGYie2A04RyrerrJwt0xykSqwGOcSTulkplZzJtZCJGTIIZ3tgkKrA9FV0Cw"/>
+</div>
+<p class="text-center font-label-md text-label-md text-on-surface">Michael Caine</p>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant">Prof. Brand</p>
+</div>
+<!-- Actor 4 -->
+<div class="flex-shrink-0 w-32 group cursor-pointer">
+<div class="w-32 h-32 rounded-full overflow-hidden border-2 border-transparent group-hover:border-primary-container transition-all mb-2">
+<img alt="Anne Hathaway" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="A portrait of a young female actress with dark, curly hair and a thoughtful gaze. The aesthetic is clean and modern, featuring soft lighting that accentuates her skin tones against a deep black background consistent with a theater-like interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAstkutanxkak0Yry7dYKMhQ2mi6ylxUprf82T21vbr0Pqd2VwXRYTyw4oCLEsDVIMxE7HpQgKn0Y12U1fKZjwttJyGKcwaVvmCuSI3-jscC5P-lrdZL63fsBfnCcDK3uCmvT7fkwCBIkVOH3vjjGTbfYSsJ2GZeBjlFTs-4Esz42WOBMUhtIqzLBFL8uZrPtcNADOyORqic-twqUrA3rvAeOZvnvVofNZen9lj1fARwnj4H34HAJljdCwD-Qt8nB-arRARrJkJ-IQ"/>
+</div>
+<p class="text-center font-label-md text-label-md text-on-surface">Anne Hathaway</p>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant">Amelia Brand</p>
+</div>
+</div>
+</section>
+<!-- Similar Content Row -->
+<section class="px-edge-margin-mobile md:px-edge-margin-desktop py-stack-gap-lg max-w-container-max mx-auto overflow-hidden">
+<h2 class="font-headline-lg text-headline-lg mb-stack-gap-md">Filmes Semelhantes</h2>
+<div class="flex gap-gutter overflow-x-auto pb-8 no-scrollbar scroll-smooth">
+<!-- Movie Card 1 -->
+<div class="flex-shrink-0 w-44 md:w-60 group cursor-pointer">
+<div class="aspect-[2/3] rounded-xl overflow-hidden bg-surface-container relative mb-3 group-hover:scale-105 group-hover:ring-2 group-hover:ring-primary-container transition-all duration-300 shadow-2xl">
+<img alt="Space Odyssey" class="w-full h-full object-cover" data-alt="A cinematic movie poster for an outer space odyssey. It features a solitary astronaut floating against a backdrop of a colorful swirling galaxy with deep purples and reds. The lighting is dramatic and ethereal, fitting a high-fidelity streaming service interface for premium movies." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKzlqWiXIes33CWdx15Gbhz3AamqUSoC5Em81F2NZyYhWSNI43Ufh0iIDSbyrzf_5QL_AcJThU9VSreI2HzQ44nR1-naRpobuhOXXRbfnQnZvxn_vwgFJw3MsdrVAQDrzt6Vj_7Tm5pqHE7J6o7g0v1WXGlJASwDSqUuKIQyeTYN0h9s38jhxCdMFM7U_OTKBDp-F8yazeseqUWTD_PwuIL-zWMf1IsEutjbjCABYWNKnxxh9dIaHWDJ5bsVxiiNZ9KRfqL4S4k8s"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-white">play_circle</span>
+</div>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface group-hover:text-primary-container transition-colors">Odisseia Estelar</h3>
+<p class="text-on-surface-variant font-label-sm text-label-sm">Ficção Científica • 2021</p>
+</div>
+<!-- Movie Card 2 -->
+<div class="flex-shrink-0 w-44 md:w-60 group cursor-pointer">
+<div class="aspect-[2/3] rounded-xl overflow-hidden bg-surface-container relative mb-3 group-hover:scale-105 group-hover:ring-2 group-hover:ring-primary-container transition-all duration-300 shadow-2xl">
+<img alt="Solaris Station" class="w-full h-full object-cover" data-alt="A movie poster depicting a futuristic orbital station silhouetted against a giant sun. The color palette is dominated by intense oranges, deep blacks, and fiery reds. The visual style is crisp and detailed, evoking a sense of epic sci-fi storytelling within a cinematic dark-mode UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-plHnjtbExb8-ZhYPUWpNv21qMN9dE4QHaEorG1kCPWF1Cxhv0gcjNuwGqzV6Ygsb6W_sfMG2sy8midS_8cu7JMmO9AYvWHzeugT9-c_kcZtmuRW6Q1vxy9GDQHJEGSGvMFotyqNHoG16KumH3cMedUvaZpB1d8EQlvcvwYsDofn2qEUZZpPwZUceMJioYtttqGd9Gs8i210Z-D4MeWPY91d50-40le4jCGA1MVfQpNpADlt5-6asMkBv6b39b42q2viG2EYIBI4"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-white">play_circle</span>
+</div>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface group-hover:text-primary-container transition-colors">Solaris: Estação Beta</h3>
+<p class="text-on-surface-variant font-label-sm text-label-sm">Suspense • 2023</p>
+</div>
+<!-- Movie Card 3 -->
+<div class="flex-shrink-0 w-44 md:w-60 group cursor-pointer">
+<div class="aspect-[2/3] rounded-xl overflow-hidden bg-surface-container relative mb-3 group-hover:scale-105 group-hover:ring-2 group-hover:ring-primary-container transition-all duration-300 shadow-2xl">
+<img alt="The Red Frontier" class="w-full h-full object-cover" data-alt="An artistic movie poster showing a lone rover on a barren, rust-colored alien planet. The sky is dark and filled with distant glowing stars. The mood is solitary and pioneering, designed with a high-contrast, cinematic aesthetic for a modern media streaming platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrQaHIO2M22Y4HuKdGvhEGpDyKHCSiwu6R_TnmVSWpLAjFdnt33B-4Q3u8Yrs_ir8o2FzBllWLRye1sE7IenoiDieUr1NrZWcKrAEmCV-MKkwCwrYumIGnp33cSACOMMW8SxqxnxCZvauQkyPzLee0df9Sc4zN-ZFLUzyyxPjoasyBHY7mDIVQIpm-G69jxtornayMDBMpShRq90604VCG-02QYPzhfsLKWAbRcxJw16gMlgD2KFxO85icnoGeFVYJB2e9JCNoLmc"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-white">play_circle</span>
+</div>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface group-hover:text-primary-container transition-colors">Fronteira Vermelha</h3>
+<p class="text-on-surface-variant font-label-sm text-label-sm">Aventura • 2022</p>
+</div>
+<!-- Movie Card 4 -->
+<div class="flex-shrink-0 w-44 md:w-60 group cursor-pointer">
+<div class="aspect-[2/3] rounded-xl overflow-hidden bg-surface-container relative mb-3 group-hover:scale-105 group-hover:ring-2 group-hover:ring-primary-container transition-all duration-300 shadow-2xl">
+<img alt="Digital Abyss" class="w-full h-full object-cover" data-alt="A cinematic poster illustrating a high-tech digital world with streaming data lines in vibrant red and white over a deep black space. The composition is dynamic and high-energy, representing a cyberpunk or technothriller movie genre, tailored for a professional dark-mode UI gallery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa4pLV1yDlZoCm2z-5P_7UrCx1ykb_9-ENfiYJtH8-YulvqJywtEYn5QDciNxbunQtRJSd6pQqDpRuPwNm0Vs1I5Jzj8y6Nj1Scko3L_UPKvgwgC_9o23Kb3NnNfxdtrtj-fdNCv5JViUmd8cMeLnJMGcOVNvQ8rgkCZlt4kaaiWMHH17oQbFM6ANhCj--HF6m125pplnK3-57JMx9MVI6Y2SOohLR7uh6NYrPynwKeNSlsazbkH4yodpViY1Qc_KhBUv9KUVgMFQ"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-white">play_circle</span>
+</div>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface group-hover:text-primary-container transition-colors">Abismo Digital</h3>
+<p class="text-on-surface-variant font-label-sm text-label-sm">Ação • 2024</p>
+</div>
+<!-- Movie Card 5 -->
+<div class="flex-shrink-0 w-44 md:w-60 group cursor-pointer">
+<div class="aspect-[2/3] rounded-xl overflow-hidden bg-surface-container relative mb-3 group-hover:scale-105 group-hover:ring-2 group-hover:ring-primary-container transition-all duration-300 shadow-2xl">
+<img alt="Event Horizon" class="w-full h-full object-cover" data-alt="A movie poster featuring an abstract representation of a black hole with a glowing accretion disk in shades of red and gold. The background is a vast, pitch-black universe. The style is immersive and cinematic, emphasizing the power of astronomical phenomena for a high-end streaming service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS14FbgismbS6hto1-unLT7divXq86WaSlmf6yqFhKHvN15Y9xq2opnGDpjhfpXRkmdqFwBPCukpXBaxF1N99LMPVBls6MfkCnOnFZFXZprMOOavs6gVf3TLr1WmfBxZjNv0IAw_99F5nuLB0K7gQKaVE_PDR_7xrEYyhe20eTlnvmeBHe2dghTK2VB4_M61o5ZHYJO-XVUUhO4633sZ0TMdt2Xq1_J268t6E5aXkhSOyTbGvDcP-tNxkiIj7Ae9IzuhhfH2wZNwY"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-white">play_circle</span>
+</div>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface group-hover:text-primary-container transition-colors">Horizonte de Eventos</h3>
+<p class="text-on-surface-variant font-label-sm text-label-sm">Drama • 2020</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-surface-variant mt-stack-gap-lg">
+<div class="max-w-container-max mx-auto px-edge-margin-mobile md:px-edge-margin-desktop py-stack-gap-lg flex flex-col md:flex-row justify-between gap-stack-gap-md">
+<div class="space-y-4">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">STREAMFLIX</span>
+<p class="text-label-sm font-label-sm text-on-secondary-container">© 2024 STREAMFLIX. ALL RIGHTS RESERVED.</p>
+</div>
+<div class="grid grid-cols-2 md:flex gap-x-12 gap-y-4">
+<div class="flex flex-col gap-2">
+<a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Help Center</a>
+<a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Terms of Use</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Privacy</a>
+<a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Cookie Preferences</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Corporate Information</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Header transparency shift on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('bg-surface/95', 'shadow-xl');
+                header.classList.remove('bg-surface/80');
+            } else {
+                header.classList.remove('bg-surface/95', 'shadow-xl');
+                header.classList.add('bg-surface/80');
+            }
+        });
+
+        // Simple horizontal scroll interaction enhancement
+        const castScroll = document.querySelector('.no-scrollbar');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        castScroll.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - castScroll.offsetLeft;
+            scrollLeft = castScroll.scrollLeft;
+        });
+        castScroll.addEventListener('mouseleave', () => { isDown = false; });
+        castScroll.addEventListener('mouseup', () => { isDown = false; });
+        castScroll.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - castScroll.offsetLeft;
+            const walk = (x - startX) * 2;
+            castScroll.scrollLeft = scrollLeft - walk;
+        });
+    </script>
+</body></html>

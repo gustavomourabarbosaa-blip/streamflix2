@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>STREAMFLIX - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#5e3f3b",
+                    "on-secondary": "#2f3131",
+                    "inverse-surface": "#e5e2e1",
+                    "on-background": "#e5e2e1",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "surface-container-low": "#1c1b1b",
+                    "error-container": "#93000a",
+                    "primary-container": "#e50914",
+                    "on-error": "#690005",
+                    "tertiary": "#c8c6c6",
+                    "surface-container": "#201f1f",
+                    "surface-container-high": "#2a2a2a",
+                    "inverse-primary": "#c0000c",
+                    "surface": "#131313",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "secondary-fixed": "#e2e2e2",
+                    "on-tertiary": "#303030",
+                    "on-primary-fixed": "#410001",
+                    "inverse-on-surface": "#313030",
+                    "primary": "#ffb4aa",
+                    "on-primary": "#690003",
+                    "surface-bright": "#393939",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-secondary-container": "#b4b5b5",
+                    "secondary-container": "#454747",
+                    "on-tertiary-container": "#fbf8f8",
+                    "surface-tint": "#ffb4aa",
+                    "primary-fixed": "#ffdad5",
+                    "on-primary-container": "#fff7f6",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-variant": "#353534",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed-variant": "#454747",
+                    "secondary": "#c6c6c7",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "tertiary-container": "#737272",
+                    "background": "#131313",
+                    "surface-dim": "#131313",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed": "#e4e2e2",
+                    "surface-container-highest": "#353534",
+                    "on-surface-variant": "#e9bcb6",
+                    "primary-fixed-dim": "#ffb4aa",
+                    "outline": "#af8782",
+                    "on-primary-fixed-variant": "#930007",
+                    "on-surface": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-gap-sm": "8px",
+                    "gutter": "12px",
+                    "edge-margin-desktop": "60px",
+                    "container-max": "1440px",
+                    "stack-gap-lg": "48px",
+                    "edge-margin-mobile": "16px",
+                    "edge-margin-tablet": "32px",
+                    "stack-gap-md": "24px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Montserrat"],
+                    "display-hero-mobile": ["Montserrat"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Montserrat"],
+                    "display-hero": ["Montserrat"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-hero-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "display-hero": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+        .scrim-hero {
+            background: linear-gradient(to top, #000000 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0) 100%),
+                        linear-gradient(to right, #000000 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 100%);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .nav-glass {
+            transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+        }
+        .nav-glass.scrolled {
+            background-color: rgba(19, 19, 19, 0.95);
+            backdrop-filter: blur(20px);
+        }
+        .movie-card:hover .progress-bar-fill {
+            height: 4px;
+        }
+    </style>
+</head>
+<body class="selection:bg-primary-container selection:text-white">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 nav-glass flex justify-between items-center w-full px-edge-margin-mobile md:px-edge-margin-desktop py-4" id="top-app-bar">
+<div class="flex items-center gap-12">
+<h1 class="text-headline-md font-headline-md font-extrabold tracking-tighter text-primary-container cursor-pointer">STREAMFLIX</h1>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-label-md font-label-md text-on-surface border-b-2 border-primary-container pb-1" href="#">Home</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Movies</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Series</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">My List</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface hover:scale-110 transition-transform" data-icon="search">search</button>
+<button class="material-symbols-outlined text-on-surface hover:scale-110 transition-transform" data-icon="notifications">notifications</button>
+<img alt="User Profile Avatar" class="w-8 h-8 rounded-lg hover:scale-105 transition-transform cursor-pointer" data-alt="A close-up professional profile avatar icon of a person with stylish features, set against a dark cinematic background. The lighting is dramatic with subtle red rim highlights, consistent with a premium streaming platform interface. The image is crisp, modern, and minimalist in execution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJu1OiFL_h6OqfZy64IbGhqXYLpF4dHX7eO9PS8BUvXunkqaeMCuiN8h2GR76aGHQecM2NarFzmme6-Mx61M_iBzlN6G41jyeF8AvkEISot4Vlk9uDABWOhMrkXsaAB40oafLVVOe00lYv_fpc00wtr1_gvrLWujU6fRsXfxoL-1EVZcv382PrniUcE5X2iCEg09ML_ZlF820V6pVSltVF_yn6-fgPSsRdZDhy0LUVqhFo0OK1NuaC0a1oAGNrgYox_C3qgPFfkHU"/>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative h-[921px] w-full flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="A massive, cinematic wide-angle shot of a futuristic sci-fi landscape. The scene features a dark, rainy atmosphere with neon red and chrome highlights reflecting off metallic surfaces. A lone figure stands before a gargantuan obsidian structure under a swirling, stormy dark sky. The mood is intense, immersive, and high-energy with deep shadows and vibrant contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB__KHsadcqRxF4Ed8_06TTm-P9FW9qimxSpkeaVGAlZp2GgeaXY51iJLq7wx0ED1krf1ezzFFiWSBGk-ObpMz555tkuLHf3fEecXjijtPoKoiXjxRrQML1adSRrCSqXsmwsD6TCVPAFdc4hJPP8QbRsfIQqPHDYtWo0zPSGsNOoW34uFykbyZw8j0ALozZud2gWQMO0-nJP80BsqdxqbxgRL9hWb2wGR4FfsdLq3VWiIUt2l5P88D9SDD7fFVWT2PgLgCbkNvW_E8"/>
+<div class="absolute inset-0 scrim-hero"></div>
+</div>
+<div class="relative z-10 px-edge-margin-mobile md:px-edge-margin-desktop max-w-4xl pt-24">
+<div class="flex items-center gap-2 mb-4">
+<span class="bg-surface-variant/40 backdrop-blur-md px-3 py-1 rounded text-label-sm font-label-sm text-primary-container border border-primary-container/30 uppercase tracking-widest">Trending Now</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Sci-Fi Thriller • 2024</span>
+</div>
+<h2 class="text-display-hero-mobile md:text-display-hero font-display-hero mb-4 leading-none">THE NEON ECLIPSE</h2>
+<p class="text-body-md md:text-body-lg font-body-lg text-on-surface-variant mb-8 max-w-xl">In a world where light is a luxury, a rogue engineer discovers a signal from a dead star that could change the fate of the last city on Earth. Experience the visual masterpiece of the decade.</p>
+<div class="flex flex-wrap gap-4">
+<button class="flex items-center gap-2 bg-primary-container text-on-primary-container px-8 py-3 rounded-lg hover:scale-105 transition-all font-headline-md text-headline-md active:brightness-125">
+<span class="material-symbols-outlined" data-icon="play_arrow" data-weight="fill">play_arrow</span>
+                        Play
+                    </button>
+<button class="flex items-center gap-2 bg-white/20 backdrop-blur-xl text-on-surface px-8 py-3 rounded-lg hover:bg-white/30 transition-all font-headline-md text-headline-md active:scale-95">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+                        More Info
+                    </button>
+</div>
+</div>
+</section>
+<!-- Movie Rows -->
+<div class="relative z-20 -mt-24 pb-stack-gap-lg space-y-stack-gap-lg">
+<!-- Continuar Assistindo -->
+<section class="pl-edge-margin-mobile md:pl-edge-margin-desktop overflow-hidden">
+<h3 class="text-headline-md font-headline-md mb-4 text-on-surface flex items-center gap-2">
+                    Continuar Assistindo
+                    <span class="material-symbols-outlined text-primary-container text-xl" data-icon="chevron_right">chevron_right</span>
+</h3>
+<div class="flex gap-gutter overflow-x-auto hide-scrollbar pr-edge-margin-mobile md:pr-edge-margin-desktop">
+<!-- Movie Card 1 -->
+<div class="group relative flex-none w-64 md:w-80 aspect-video rounded-lg overflow-hidden bg-surface-container-high transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A wide cinematic shot of a dark urban cityscape at night, with rain reflecting neon blue and red lights. The atmosphere is moody and atmospheric. A thin progress bar at the bottom glows in vibrant streaming red, showing about 60% completion. Premium, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ79WNF7cJb2lguBrFcvlcafhceFbetQZ2pLiHN6_W5uSh6yoAENh8asycpYb6ozRSpi0qcD46nM1e2SnPCGIqOF1_r2pI3rD6-9x90x2ZnStOfccvqkNfpnBkqfP4V4Bk2Ezwqz78wU9ORaDVV59cMn6CJWSwQImC_9FtD44FyqS-chfkR42fYF9U1op0_fCtb1rgphtuORpr2RddP08y2u-rCDGMULqtLfOEEDqSdc9aeHjQY_zBn60YwCWa-PDJU1bJ47KDhBk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+<span class="text-label-md font-label-md text-white">E04: The Signal</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">24m remaining</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-surface-variant w-full">
+<div class="h-full bg-primary-container w-[65%] progress-bar-fill transition-all"></div>
+</div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-5xl" data-icon="play_circle" data-weight="fill">play_circle</span>
+</div>
+</div>
+<!-- Repeat Cards... -->
+<div class="group relative flex-none w-64 md:w-80 aspect-video rounded-lg overflow-hidden bg-surface-container-high transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A dramatic movie scene featuring a high-speed car chase through a tunnel of light. Cinematic motion blur, deep contrast between black shadows and intense red streaks. A small progress bar at the bottom indicates 85% completion. Immersive theater-like aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpOcDmNUffndWxhZqNdw-psba1L5y99uS8ftu1vSj-_SucMn-RsNNJjNT0t__gehufCiE1H75Qo5BbIwtYcLeUKdCzQfK8VxIGuQdHqtK4xM7gHSAGaFIt6Rihj1rEhCtESjaM-j6Eyf773eCuAa7ND8TQUzBXTZ2I3ICkFITmao8jUZb5t-8v9HxMME3j35EsO0Aj4i5_KmD4XSRzsMZ54tGBgTZ0Qpfg2XabUlWwlcLu-GY9oLp7UBIV063P5i5CuenqbjEVa9Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+<span class="text-label-md font-label-md text-white">Midnight Drive</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">12m remaining</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-surface-variant w-full">
+<div class="h-full bg-primary-container w-[85%] progress-bar-fill transition-all"></div>
+</div>
+</div>
+<div class="group relative flex-none w-64 md:w-80 aspect-video rounded-lg overflow-hidden bg-surface-container-high transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A close-up shot of a mysterious figure in a high-tech helmet, reflecting complex digital code. Dark sci-fi aesthetic with vibrant red accent lights on the suit. Minimalist and cinematic. A progress bar at the bottom shows 10% completion." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdBN-E8WioeY2L4Uvf1DUwsTFx644nt01WR7o0rfi4kpIMUuKDy-zhDzoQu-a-vHDMTd38VZRlte86lf1P0Uknxwbyq7mZ3vJmTEiZOSxziyInNHwvT6dno9jlc7FY68yvV3KQeOfcdw4jB-KxTHB2H0alsnAyzuhPURFaTY8NCGChuRJmcf-r7xgC56kp16Pw1n9zLIGrkgHIIg_Oh_8nLc61csCHIgWIuGJFW_y1R-212RZO-1AJJ9YmJtpLV5n2Qe50KnAb0Sk"/>
+<div class="absolute bottom-0 left-0 h-1 bg-surface-variant w-full">
+<div class="h-full bg-primary-container w-[10%] progress-bar-fill transition-all"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Populares no Streamflix -->
+<section class="pl-edge-margin-mobile md:pl-edge-margin-desktop overflow-hidden">
+<h3 class="text-headline-md font-headline-md mb-4 text-on-surface">Populares no Streamflix</h3>
+<div class="flex gap-gutter overflow-x-auto hide-scrollbar pr-edge-margin-mobile md:pr-edge-margin-desktop">
+<!-- Poster Cards -->
+<div class="flex-none w-36 md:w-48 aspect-[2/3] rounded-lg overflow-hidden bg-surface-container transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A movie poster for an epic space opera. A lone ship drifts toward a massive, swirling nebula of deep red and black. Minimalist title space, cinematic lighting, professional poster composition with deep shadows and high resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8SIhrF8GEBVViF6OPapFr6s4rUrUz8GEm7CwT6UtM-Rev7i0x6k8cEQIEPoo6mtBdmzpV5AyxPoalV1EYss4BUCSWOk5sebYR1CqRNPhq6b04LXVWlA1Gn504ueP4DFQhEpPIu2ProGk2BQ21sMZWirnwAgKMQ4hdNIbVDCalkwVx63QIKyuE4nFZ1TvER2pj2uwy1BMVqf6D8avxgOQSICLbbbE7ACZ-OG3RM5BdnWioTU6N_IsUiSL7VztiHFtLec2UEUZgROk"/>
+</div>
+<div class="flex-none w-36 md:w-48 aspect-[2/3] rounded-lg overflow-hidden bg-surface-container transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A dark and gritty crime drama poster. A shadowy figure walking down a foggy alleyway under a single red streetlamp. High contrast, film grain texture, professional cinematic aesthetic with authoritative mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzPv8iiiqHB6mvJQ1xveznDvH7fTIzl1DS14huzidgACQbS19yfPIXz-VAP904wTZ5YQ6AreyHfREZkohD8sVIQfgd9VHEfDfdq-_dBakOQfACp_PD29PcKHLw7it3xivBVogrrcZ83nAsg7zrtpPl2UfhN_KS3xspEntztuGaNZDVMJF-hEHuePqU2ojkEXlmPykl3BPxRcIDILcdwEcIjaOAqJDTw2OGWOaTRUerYvCXQx4fvVGYKgAl77cMhsw0ibMaj-fri1Q"/>
+</div>
+<div class="flex-none w-36 md:w-48 aspect-[2/3] rounded-lg overflow-hidden bg-surface-container transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A documentary style movie poster featuring a massive, ice-capped mountain range under a dark, star-filled sky. Majestic, wide-angle lens, deep blacks and crisp white highlights. Cinematic and awe-inspiring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbm1hKOsK0nLjmtHVGEwe0G3t0eI2SuHtDaQfz2XaLsGYWhQmBjRqaeGp_5Rxi1pRTSwwfdnOumu64GDP1gXI19z9U0AFzTS-Hz-ekSTZNjt7LydyCyaJo3r_tMkvTSW0dYnTIRq6kMhOLKCkiINgTt337ZhDEAF2esB9DSzm478ByK8ViXbOwnQPlQcvOoPj7DuF51bzB807Gaa1Sn0hwoqipT8sRZj04mvELEM4nPaC-1IhJlssL2FPzz8wfgxCUzwkrMaiaTug"/>
+</div>
+<div class="flex-none w-36 md:w-48 aspect-[2/3] rounded-lg overflow-hidden bg-surface-container transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="An abstract psychological thriller poster. Two faces merging in a kaleidoscope of red and dark grey smoke. Intense emotional vibe, high-end artistic cinema style. Deep shadows and vibrant accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX860Nmpxo0zQiQxoKwQ5r4lk7Zr3jUhHzZ-H8d-QY71YsHTtMJGmbg4XabxdWzpRNlllYVdtTMdfdBjDiYDOJwiB_GJQIlZ1UGqrTmPcYHtmJZqP-MWUzjE2je6fO5qFPatnZorcYF9eL_AI6E0Rv9Upz19TepeCZAz3QSS65Nsh_JFqc_8CJZud1bw7Rb2qKxnp-Z3Y3LPN3UTtnOyWLIgKzwXP-zlf8QEMmzfni6DDBE7AOhfDa_P9zDRNXoRuKQBirrZrnDRQ"/>
+</div>
+<div class="flex-none w-36 md:w-48 aspect-[2/3] rounded-lg overflow-hidden bg-surface-container transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A horror movie poster featuring a dark, ancient forest with a single glowing red light deep between the trees. Foggy atmosphere, eerie mood, professional cinematic color grading." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEqUQstHbreF4kz4zdzEGG0GdPSa34HQimeJp2BhhJAUtxZFSYTIhiuopup7eyFsmd8a-02oKMAKaIF5ONzsegtcVrPEVHl-5nP61_lsszhgYioWW_ZoOMMBxUTw18eGtXQ6_WyZKZ0GC4RKcjUnEJOBERWXKywmsaFJxjiat9MmyKBUNDUiVh8vq0myuqtxtsQOpdgXHwfNsXbEfWNSQTGPf9qGTTuwte04cWpdaSPO1BsAUcHPT29vRKSxe_8c2n2wcxqa2tx8o"/>
+</div>
+<div class="flex-none w-36 md:w-48 aspect-[2/3] rounded-lg overflow-hidden bg-surface-container transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A classic period drama poster. A grand ballroom in silhouette with a single couple dancing in a pool of golden light. Elegant, sophisticated, cinematic depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4AGu1GmlhYyK9OZ-wkUYJ2CcjhmbH8rzvx7CrojZog7DTIYR6pOq31DC2HVIox47B2lFw5ilujNK8J_FiTo88Czf1ZKY7OQ8k78eKJ4fXrlLyUaTOqZRgi8rQ8MZ98mw6rb5D3oHOZN7xk_i9_koc1U4H2wLQzXY7IXtCrErtwj6gtARbGE6Fmipd_bFaJ68qV5DjL7klx0XvTqqc7R75lSt1nKnhy6DGqrl5gGCWGJG-eI9gGFEtxf2c_IfaDnMDM2BthHgF2Nk"/>
+</div>
+</div>
+</section>
+<!-- Filmes de Ação (Bento Style Layout Feature) -->
+<section class="px-edge-margin-mobile md:px-edge-margin-desktop">
+<h3 class="text-headline-md font-headline-md mb-6 text-on-surface">Filmes de Ação</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter h-auto md:h-[400px]">
+<div class="col-span-2 row-span-1 md:row-span-2 group relative rounded-xl overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A massive action-packed scene from a cyberpunk thriller. High-tech armored vehicles racing through a futuristic highway at night. Explosions of orange fire against a deep black and electric blue sky. High energy, immersive cinematic quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMrPdBoa1bxYy-wwJuloCP1wraCYM20LqDN0wYYIKA-apmMkD6VsA-SoxLeEsSGlBAN1PmF-PO5AOhMpvRzWoJXQIVjVu1QDl7MwEuK3ZpPA_VHWEj5TfsZ8oalH1C53FaaTml52M711hijBcgL5aTw5EUgTGGAwK2B6vYE60vVKddifEXDwZR-889URL2E8MB-Pd6uoM1ChqKQzYmFGU7rtqfdAH5T32PZiIzBf8tuP_eI5bAzKH0zDNvtGr6FOuBq_Zi0P4S70M"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-6 flex flex-col justify-end">
+<span class="text-primary-container font-bold text-label-sm mb-1 uppercase">Top Rated</span>
+<h4 class="text-headline-lg font-headline-lg">CHROME OVERDRIVE</h4>
+</div>
+</div>
+<div class="group relative rounded-xl overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A high-intensity action shot of a spy in silhouette jumping across a rooftop during a sunset. Deep purple and vibrant red sky. Professional film production style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANciaXwir4AG6g_ApOaa5ZCgGOsBf8D6FZ6CgTFyrG0bYMSuEJgS-tg5JFopl72FTUa67vC3_6GCx3U3VBtKY7-VVDVMOiE3veTuUJqvnMHn44JbfDAb3xhcN2_x6Li0U2rZRljzgo-VXM1gfeMqJq4Abe2a79kD-_MRodkM256i-Ri3fszw5JZ95k9NSOLEWvvy-yZ-NLiO2QOBxwkoXUR9ex7662avIigZHXRXNR2VKfSFQKSVHnI-eplEcen3wWozQs0TBMwRo"/>
+</div>
+<div class="group relative rounded-xl overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="An intense martial arts scene in a rain-slicked dark alley. Two figures in combat, frozen in a high-action pose. Dramatic backlighting and cinematic contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCffU3XHVBFJFb_L4kp7y1h7JFqSuyFD7C25PLpodikDMJ70NRIVQule_VPzspUtONxzdEiGSaEQClaPisOtqP3_yFgz6Og-rSElLASsQpqNwnoYZFhdA-Tisk5G4kvYIrlLvCfOLOb7nsSKUWHZC2ckXAyO2Lc5IjN2deZRHbvLZr7IJopBoLrCBjZyZdRFTSuxEeYwvlBf0-bmkFwrLySka-I6qJwoHQ_3csvje0o6FEzNxocj8FS5aKZ524b-SHmKCAghVMm4go"/>
+</div>
+<div class="col-span-2 md:col-span-2 group relative rounded-xl overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A dramatic movie scene featuring a massive spaceship landing on a desert planet at dawn. Warm orange glow of the sun against cold metallic hull. Epic scale and cinematic grandeur." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEy_Hr9vjNMgojNLBDpiCa5Kp9ec26GqWI722EbFhlRSQqWPbDS_dRQCY1BSoOuPztszPZZ1HtDNKWZ9-94Two8dcOxc8hH1SfLr4cROplUrYV66ksMBx3yUm2ZIKSx0OmyjmLOI3TLa0J9WMhFBfLOKP_Bck0FetNELV_wAEzqiW5aozdFfCNWLjV55u_JmT1owEGJlqORhM6G0E37eqVM8FLepRDLF6fifaFQYR2oInDmlQUqtrnM6ge1J6i5nKi6UORXfdPQn4"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent p-6 flex flex-col justify-center max-w-xs">
+<h4 class="text-headline-md font-headline-md mb-2">DESERT STAR</h4>
+<p class="text-label-sm font-label-sm text-on-surface-variant">The biggest blockbuster of the summer is now available to stream.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Séries Premiadas -->
+<section class="pl-edge-margin-mobile md:pl-edge-margin-desktop overflow-hidden">
+<h3 class="text-headline-md font-headline-md mb-4 text-on-surface">Séries Premiadas</h3>
+<div class="flex gap-gutter overflow-x-auto hide-scrollbar pr-edge-margin-mobile md:pr-edge-margin-desktop">
+<div class="flex-none w-48 md:w-64 aspect-video rounded-lg overflow-hidden bg-surface-container transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A cinematic still from a prestige period drama. A dark, moody study filled with leather-bound books and a single candle illuminating an old map. Professional photography, high-end production value, warm wood tones and deep shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq6MpTtAvQFC_hC2cjddSPNMx3NFYxBwqnjS8AGsPAdTwHsr_ShvAzERV6vdeSysGJKKGhYIwv4WpJ2l-_3cRDPyo8N-HVULphBjtqzFIOO2vf4c3bI-1lcfzw3lG4Zqr8nBSEYnPsH9lMf53SUpmPfYU7AIAclmREBX-Zem01823nmIzlDeOVoOBuakMl1VOF7T929ROOmEmLY_xsCN0Kar3eYy3bi6xbaIiIckXrL0QUry3xCiWQuJei3Ucx3bt2NsjCgRq05Ck"/>
+</div>
+<div class="flex-none w-48 md:w-64 aspect-video rounded-lg overflow-hidden bg-surface-container transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A still from a psychological thriller series. A modern glass house in the middle of a dark, snowy forest at night. Interior lights glow warmly against the cold blue exterior. Cinematic composition and atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF8Nf2ItS6afd1thq_8uLSj5FqPh03t0TShky67vQGx310PpM4FGIHqKWtmb6Ok0WBiTdxakOZywSlBrcuymFUS-C7ds2cSKa3ZLSU3XizsgiLyLL-iOKqpcJg2Amn402jR8JWno4qrZmncxkwT4-djy8FMYvd3cgZDReRbCNtPkupbS1udCwMNW2ozWvJ_Ln6Q2e7Fi-FdkZkBEWdr8fRH0cvoPKLk52yOUSXwd11QMFwkgM_WJvH151asrOh9vTwhVPvACwFKMU"/>
+</div>
+<div class="flex-none w-48 md:w-64 aspect-video rounded-lg overflow-hidden bg-surface-container transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A sci-fi series still showing a massive digital brain made of interconnected glowing red and white nodes. High-tech, futuristic aesthetic, immersive and complex visual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCENWV49mgGN1faVJv41RUp8Bh4wfjLHKqgPJmI6bzjXzt5OTtVqGpt81RrA-NjFYVavnS0JlHzBa_CgD5VR8zmULgm8u0NOS3Y_gbwIfPlMY_rh5efWS4yjAStcx--qX-wUq5S_nhoueuuWH9b-IJRMFxqz_y4U_H13blRkk0UzG51bfm0mnIu2YhAw89_QCsHRI1r-rhJvfz8SV1QKCLmhysNR0lRJFh05U2Jd62F52yCwrUHg_9rR2CqmX-rmX2oz7XEzt_YCS0"/>
+</div>
+<div class="flex-none w-48 md:w-64 aspect-video rounded-lg overflow-hidden bg-surface-container transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A minimalist architectural shot from a noir series. A white spiral staircase in a dark, shadow-filled room. Sharp angles, high contrast, artistic cinematography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPgmHtZExQZ9gyhuZH4cUfY67kZtLyYXTjlRyGi4BsSKSykLQclOfYY8y3wJTp-Bj-cBfA18OG34Hj1WD0Z87Ya-bm-5xy94oAmqNnN8Jokyah-FJWG2EwAnbI8R1wwepVTVCxCBcgG6AdF56bCBhToM6PenJTpV2vuh_oZFNG5KnZkZALevIgHefnYrvcOrz5Ci002Sj46bxGdOY_kL2hFvOBPSoeJZMJrEHbH-_vkblPM5AW30AyKCSQdSX30-fFFTFZ2RL0yXI"/>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-surface-variant">
+<div class="max-w-container-max mx-auto px-edge-margin-mobile md:px-edge-margin-desktop py-stack-gap-lg flex flex-col md:flex-row justify-between gap-stack-gap-md">
+<div class="space-y-4">
+<h2 class="text-headline-sm font-headline-sm font-bold text-on-surface">STREAMFLIX</h2>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer" data-icon="facebook">social_leaderboard</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer" data-icon="instagram">retweet</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer" data-icon="twitter">retweet</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer" data-icon="youtube">video_youtube</span>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+<div class="flex flex-col gap-2">
+<a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Help Center</a>
+<a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Terms of Use</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Privacy</a>
+<a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Cookie Preferences</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Corporate Information</a>
+</div>
+</div>
+<div class="flex flex-col gap-4 items-start md:items-end">
+<button class="border border-on-secondary-container text-on-secondary-container px-4 py-1 text-label-sm font-label-sm hover:bg-on-secondary-container hover:text-surface transition-colors">
+                    Service Code
+                </button>
+<p class="text-label-sm font-label-sm text-on-secondary-container">© 2024 STREAMFLIX. ALL RIGHTS RESERVED.</p>
+</div>
+</div>
+</footer>
+<script>
+        // Handle Navbar Scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('top-app-bar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Add micro-interactions to movie cards
+        document.querySelectorAll('.movie-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Potential for more complex JS animations if needed
+            });
+        });
+    </script>
+</body></html>

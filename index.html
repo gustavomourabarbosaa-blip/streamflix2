@@ -1,0 +1,2864 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>STREAMFLIX - Torrentio Movie Catalog</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "outline-variant": "#5e3f3b",
+              "on-secondary": "#2f3131",
+              "inverse-surface": "#e5e2e1",
+              "on-background": "#e5e2e1",
+              "on-tertiary-fixed": "#1b1c1c",
+              "surface-container-low": "#1c1b1b",
+              "error-container": "#93000a",
+              "primary-container": "#e50914",
+              "on-error": "#690005",
+              "tertiary": "#c8c6c6",
+              "surface-container": "#201f1f",
+              "surface-container-high": "#2a2a2a",
+              "inverse-primary": "#c0000c",
+              "surface": "#131313",
+              "tertiary-fixed-dim": "#c8c6c6",
+              "secondary-fixed": "#e2e2e2",
+              "on-tertiary": "#303030",
+              "on-primary-fixed": "#410001",
+              "inverse-on-surface": "#313030",
+              "primary": "#ffb4aa",
+              "on-primary": "#690003",
+              "surface-bright": "#393939",
+              "on-tertiary-fixed-variant": "#474747",
+              "on-secondary-container": "#b4b5b5",
+              "secondary-container": "#454747",
+              "on-tertiary-container": "#fbf8f8",
+              "surface-tint": "#ffb4aa",
+              "primary-fixed": "#ffdad5",
+              "on-primary-container": "#fff7f6",
+              "surface-container-lowest": "#0e0e0e",
+              "surface-variant": "#353534",
+              "error": "#ffb4ab",
+              "on-secondary-fixed-variant": "#454747",
+              "secondary": "#c6c6c7",
+              "secondary-fixed-dim": "#c6c6c7",
+              "tertiary-container": "#737272",
+              "background": "#131313",
+              "surface-dim": "#131313",
+              "on-secondary-fixed": "#1a1c1c",
+              "on-error-container": "#ffdad6",
+              "tertiary-fixed": "#e4e2e2",
+              "surface-container-highest": "#353534",
+              "on-surface-variant": "#e9bcb6",
+              "primary-fixed-dim": "#ffb4aa",
+              "outline": "#af8782",
+              "on-primary-fixed-variant": "#930007",
+              "on-surface": "#e5e2e1"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+            },
+            "spacing": {
+              "stack-gap-sm": "8px",
+              "gutter": "12px",
+              "edge-margin-desktop": "60px",
+              "container-max": "1440px",
+              "stack-gap-lg": "48px",
+              "edge-margin-mobile": "16px",
+              "edge-margin-tablet": "32px",
+              "stack-gap-md": "24px"
+            },
+            "fontFamily": {
+              "label-md": ["Inter"],
+              "label-sm": ["Inter"],
+              "headline-md": ["Montserrat"],
+              "display-hero-mobile": ["Montserrat"],
+              "body-md": ["Inter"],
+              "headline-lg": ["Montserrat"],
+              "display-hero": ["Montserrat"],
+              "headline-lg-mobile": ["Montserrat"],
+              "body-lg": ["Inter"]
+            },
+            "fontSize": {
+              "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+              "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+              "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+              "display-hero-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "800"}],
+              "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+              "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+              "display-hero": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+              "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+              "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        /* ── Base ── */
+        body {
+            background-color: #000000;
+            color: #e5e2e1;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            /* Room for fixed bottom nav on mobile */
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+        @media (max-width: 767px) {
+            body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+        }
+
+        /* ── Gradients ── */
+        .scrim-hero {
+            background: linear-gradient(to top, #000000 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 100%),
+                        linear-gradient(to right, #000000 0%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0) 100%);
+        }
+        .scrim-details {
+            background: linear-gradient(to top, #131313 0%, rgba(19, 19, 19, 0.7) 40%, transparent 100%);
+        }
+        .scrim-left {
+            background: linear-gradient(to right, #131313 0%, rgba(19, 19, 19, 0.5) 60%, transparent 100%);
+        }
+
+        /* ── Scrollbars ── */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        ::-webkit-scrollbar { width: 8px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; }
+        ::-webkit-scrollbar-thumb { background: #353534; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #e50914; }
+
+        /* ── Top nav ── */
+        .nav-glass {
+            transition: background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+        }
+        .nav-glass.scrolled {
+            background-color: rgba(19, 19, 19, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+        }
+
+        /* ── Bottom nav (mobile only) ── */
+        #bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 60;
+            background: rgba(13,13,13,0.97);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+        @media (max-width: 767px) { #bottom-nav { display: flex; } }
+        .bn-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            padding: 10px 4px;
+            cursor: pointer;
+            color: #b4b5b5;
+            transition: color 0.2s;
+            min-height: 56px;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .bn-item.active { color: #e50914; }
+        .bn-item span.material-symbols-outlined { font-size: 24px; }
+        .bn-item .bn-label { font-size: 10px; font-weight: 600; letter-spacing: 0.03em; }
+
+        /* ── Card interactions ── */
+        .movie-card:hover .progress-bar-fill { height: 4px; }
+        .movie-card:hover .card-overlay { opacity: 1; }
+        .cinema-gradient { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%); }
+
+        /* ── Search input ── */
+        .glass-input {
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-input:focus {
+            border-bottom: 2px solid #e50914;
+            background: rgba(255,255,255,0.12);
+            outline: none;
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.2);
+        }
+
+        /* ── View sections ── */
+        .view-section {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .view-section.hidden { display: none !important; opacity: 0; transform: translateY(15px); }
+
+        /* ── Active top nav ── */
+        .active-nav { border-bottom: 2px solid #e50914; color: #e5e2e1 !important; }
+
+        /* ── Hero: tighter on phones ── */
+        @media (max-width: 767px) {
+            #home-screen .relative.z-10 { padding-top: 5rem; }
+            #home-screen h2 { font-size: 2rem; line-height: 1.1; }
+            #home-screen p.max-w-xl { font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.25rem; }
+            #home-hero-play-btn, #home-hero-info-btn { padding: 0.75rem 1.5rem; font-size: 0.95rem; }
+        }
+
+        /* ── Bento grid: stack to 1col on tiny screens ── */
+        @media (max-width: 480px) {
+            .bento-grid { grid-template-columns: 1fr !important; height: auto !important; }
+            .bento-grid > * { aspect-ratio: 16/9; }
+            .bento-grid .col-span-2 { grid-column: span 1; }
+        }
+
+        /* ── Player: full-bleed on mobile ── */
+        @media (max-width: 767px) {
+            #player-screen section { padding-left: 0 !important; padding-right: 0 !important; }
+            #player-screen .aspect-video { border-radius: 0 !important; border-left: none !important; border-right: none !important; }
+            #player-screen .mt-6, #player-screen .mt-8 { padding-left: 1rem; padding-right: 1rem; }
+            /* Server buttons: scroll horizontally */
+            #player-screen .flex.flex-wrap.gap-3 { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
+            #player-screen .flex.flex-wrap.gap-3 button { flex-shrink: 0; }
+            #player-screen .flex.flex-wrap.gap-2 { flex-wrap: nowrap; overflow-x: auto; }
+            #player-screen .flex.flex-wrap.gap-2 button { flex-shrink: 0; font-size: 12px; padding: 8px 12px; }
+        }
+
+        /* ── Details hero: shorter on mobile ── */
+        @media (max-width: 767px) {
+            #details-screen section.relative { height: 55vh; }
+            #details-title { font-size: 1.75rem; line-height: 1.1; }
+            #details-play-btn, #bookmark-btn { padding: 0.75rem 1.25rem; font-size: 0.9rem; }
+        }
+
+        /* ── Catalog grid: 2 cols on very small ── */
+        @media (max-width: 360px) {
+            #catalog-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+
+        /* ── Touch targets: bigger tap areas ── */
+        @media (max-width: 767px) {
+            button, a[href], [onclick] { min-height: 44px; }
+            .material-symbols-outlined { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+        }
+
+        /* ── Footer: hide on mobile (use bottom nav) ── */
+        @media (max-width: 767px) {
+            footer { margin-bottom: 0; }
+        }
+
+        /* ── Modals: full-screen on mobile ── */
+        @media (max-width: 640px) {
+            #auth-modal > div,
+            #premium-checkout-modal > div { 
+                max-width: 100% !important;
+                width: 100% !important;
+                border-radius: 1.25rem 1.25rem 0 0 !important;
+                position: fixed !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                margin: 0 !important;
+                max-height: 92vh;
+                overflow-y: auto;
+            }
+            #auth-modal, #premium-checkout-modal {
+                align-items: flex-end !important;
+            }
+        }
+
+        /* ── Horizontal rows: snap on mobile ── */
+        @media (max-width: 767px) {
+            .hide-scrollbar {
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+            .hide-scrollbar > * { scroll-snap-align: start; }
+        }
+    </style>
+</head>
+<body class="selection:bg-primary-container selection:text-white font-body-md overflow-x-hidden">
+
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 nav-glass flex justify-between items-center px-edge-margin-mobile md:px-edge-margin-desktop py-4" id="top-app-bar">
+    <div class="flex items-center gap-12">
+        <h1 onclick="routeTo('home')" class="text-headline-md font-headline-md font-extrabold tracking-tighter text-primary-container cursor-pointer select-none">STREAMFLIX</h1>
+        <nav class="hidden md:flex items-center gap-6">
+            <a id="nav-home" class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors active-nav" href="javascript:void(0)" onclick="routeTo('home')">Início</a>
+            <a id="nav-catalog" class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="javascript:void(0)" onclick="routeTo('catalog')">Catálogo</a>
+            <a id="nav-mylist" class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="javascript:void(0)" onclick="routeTo('mylist')">Minha Lista</a>
+            <a class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="./design_system.html">Design System</a>
+        </nav>
+    </div>
+    <div class="flex items-center gap-6">
+        <!-- Search bar -->
+        <div class="relative hidden sm:block">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant select-none">search</span>
+            <input id="header-search" class="glass-input pl-10 pr-4 py-2 rounded-lg text-label-md font-label-md w-48 focus:w-72" placeholder="Pesquisar títulos..." type="text" oninput="handleSearch(this.value)"/>
+        </div>
+        
+        <button class="material-symbols-outlined text-on-surface hover:scale-110 transition-transform sm:hidden" onclick="routeTo('catalog')">search</button>
+        <button class="material-symbols-outlined text-on-surface hover:scale-110 transition-transform hidden md:inline-flex" onclick="routeTo('mylist')">favorite</button>
+        <div class="relative">
+            <img id="nav-user-avatar" onclick="toggleUserMenu(event)" alt="User Profile Avatar" class="w-8 h-8 rounded-lg hover:scale-105 transition-transform cursor-pointer border border-surface-variant" src="https://ui-avatars.com/api/?name=Guest&background=e50914&color=white&size=128"/>
+            <!-- Sleek profile dropdown -->
+            <div id="user-profile-menu" class="hidden absolute right-0 mt-3 w-56 rounded-xl bg-surface-container-high border border-white/10 p-4 shadow-2xl backdrop-blur-xl z-50 animate-fadeIn">
+                <div class="flex items-center gap-3 border-b border-surface-variant/30 pb-3 mb-3">
+                    <div id="dropdown-user-initial" class="w-10 h-10 rounded-full bg-primary-container text-white flex items-center justify-center font-bold text-label-md select-none">
+                        G
+                    </div>
+                    <div class="min-w-0 flex-grow">
+                        <p id="dropdown-user-name" class="text-label-md font-semibold text-on-surface truncate leading-tight">Gustavo Silva</p>
+                        <p id="dropdown-user-email" class="text-[11px] text-on-surface-variant truncate mt-0.5">gustavo@gmail.com</p>
+                    </div>
+                </div>
+                
+                <!-- Status & Upgrade section -->
+                <div class="space-y-2 mb-3 pb-3 border-b border-surface-variant/30 text-label-sm">
+                    <p class="flex justify-between items-center text-on-surface-variant">
+                        Status: 
+                        <span id="user-status-badge" class="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-surface-container text-on-surface">Grátis</span>
+                    </p>
+                    <button id="upgrade-premium-btn" onclick="openCheckout()" class="w-full py-1.5 bg-[#facc15] hover:bg-[#eab308] text-black font-bold rounded-lg text-[11px] transition-all hover:scale-[1.02] active:scale-95">
+                        ⚡ Seja Premium (R$ 5,00)
+                    </button>
+                    <!-- Admin option (hidden by default) -->
+                    <button id="dropdown-admin-entry" onclick="routeTo('admin')" class="hidden w-full py-1.5 bg-primary-container text-white font-bold rounded-lg text-[11px] transition-all hover:scale-[1.02] active:scale-95 animate-pulse">
+                        🛠️ Painel Admin
+                    </button>
+                </div>
+
+                <button onclick="logoutUser()" class="flex items-center gap-2 text-primary hover:text-white transition-colors text-label-sm font-semibold w-full hover:bg-primary-container/10 p-2 rounded-lg">
+                    <span class="material-symbols-outlined text-[18px]">logout</span>
+                    Sair da Conta
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="min-h-screen">
+    
+    <!-- ================= HOME SCREEN ================= -->
+    <div id="home-screen" class="view-section">
+        <!-- Hero Section -->
+        <section class="relative h-[85vh] md:h-[95vh] w-full flex items-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img id="home-hero-bg" class="w-full h-full object-cover select-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB__KHsadcqRxF4Ed8_06TTm-P9FW9qimxSpkeaVGAlZp2GgeaXY51iJLq7wx0ED1krf1ezzFFiWSBGk-ObpMz555tkuLHf3fEecXjijtPoKoiXjxRrQML1adSRrCSqXsmwsD6TCVPAFdc4hJPP8QbRsfIQqPHDYtWo0zPSGsNOoW34uFykbyZw8j0ALozZud2gWQMO0-nJP80BsqdxqbxgRL9hWb2wGR4FfsdLq3VWiIUt2l5P88D9SDD7fFVWT2PgLgCbkNvW_E8" alt="Hero Backdrop"/>
+                <div class="absolute inset-0 scrim-hero"></div>
+            </div>
+            <div class="relative z-10 px-edge-margin-mobile md:px-edge-margin-desktop max-w-4xl pt-24">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="bg-surface-variant/40 backdrop-blur-md px-3 py-1 rounded text-label-sm font-label-sm text-primary-container border border-primary-container/30 uppercase tracking-widest font-bold">Trending Now</span>
+                    <span id="home-hero-info" class="text-label-sm font-label-sm text-on-surface-variant">Ficção Científica • 2024</span>
+                </div>
+                <h2 id="home-hero-title" class="text-display-hero-mobile md:text-display-hero font-display-hero mb-4 leading-none select-none tracking-tight">THE NEON ECLIPSE</h2>
+                <p id="home-hero-desc" class="text-body-md md:text-body-lg font-body-lg text-on-surface-variant mb-8 max-w-xl">In a world where light is a luxury, a rogue engineer discovers a signal from a dead star that could change the fate of the last city on Earth. Experience the visual masterpiece of the decade.</p>
+                <div class="flex flex-wrap gap-4">
+                    <button id="home-hero-play-btn" class="flex items-center gap-2 bg-primary-container text-white px-8 py-3 rounded-lg hover:scale-105 hover:brightness-110 transition-all font-headline-md text-headline-md shadow-lg shadow-primary-container/20 active:scale-95">
+                        <span class="material-symbols-outlined select-none" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                        Assistir
+                    </button>
+                    <button id="home-hero-info-btn" class="flex items-center gap-2 bg-white/10 backdrop-blur-xl text-on-surface px-8 py-3 rounded-lg hover:bg-white/20 transition-all font-headline-md text-headline-md border border-white/10 active:scale-95">
+                        <span class="material-symbols-outlined select-none">info</span>
+                        Mais Informações
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Movie Rows Container -->
+        <div class="relative z-20 -mt-24 pb-stack-gap-lg space-y-stack-gap-lg bg-gradient-to-t from-black via-black/90 to-transparent pt-12">
+            <!-- Continuar Assistindo -->
+            <section class="pl-edge-margin-mobile md:pl-edge-margin-desktop overflow-hidden">
+                <h3 class="text-headline-md font-headline-md mb-4 text-on-surface flex items-center gap-2 font-bold tracking-tight">
+                    Continuar Assistindo
+                    <span class="material-symbols-outlined text-primary-container text-xl select-none" onclick="routeTo('catalog')">chevron_right</span>
+                </h3>
+                <div id="row-continue" class="flex gap-gutter overflow-x-auto hide-scrollbar pr-edge-margin-mobile md:pr-edge-margin-desktop pb-4">
+                    <!-- Loaded dynamically -->
+                </div>
+            </section>
+
+            <!-- Populares no Streamflix -->
+            <section class="pl-edge-margin-mobile md:pl-edge-margin-desktop overflow-hidden">
+                <h3 class="text-headline-md font-headline-md mb-4 text-on-surface font-bold tracking-tight">Populares no Streamflix</h3>
+                <div id="row-popular" class="flex gap-gutter overflow-x-auto hide-scrollbar pr-edge-margin-mobile md:pr-edge-margin-desktop pb-4">
+                    <!-- Loaded dynamically -->
+                </div>
+            </section>
+
+            <!-- Bento Style Action Layout -->
+            <section class="px-edge-margin-mobile md:px-edge-margin-desktop">
+                <h3 class="text-headline-md font-headline-md mb-6 text-on-surface font-bold tracking-tight">Destaques da Ação</h3>
+                <div class="bento-grid grid grid-cols-2 md:grid-cols-4 gap-gutter h-auto md:h-[400px]">
+                    <!-- Bento item 1 (Large) -->
+                    <div id="bento-1" class="col-span-2 row-span-1 md:row-span-2 group relative rounded-xl overflow-hidden cursor-pointer shadow-2xl">
+                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMrPdBoa1bxYy-wwJuloCP1wraCYM20LqDN0wYYIKA-apmMkD6VsA-SoxLeEsSGlBAN1PmF-PO5AOhMpvRzWoJXQIVjVu1QDl7MwEuK3ZpPA_VHWEj5TfsZ8oalH1C53FaaTml52M711hijBcgL5aTw5EUgTGGAwK2B6vYE60vVKddifEXDwZR-889URL2E8MB-Pd6uoM1ChqKQzYmFGU7rtqfdAH5T32PZiIzBf8tuP_eI5bAzKH0zDNvtGr6FOuBq_Zi0P4S70M" alt="Chrome Overdrive"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-6 flex flex-col justify-end">
+                            <span class="text-primary-container font-bold text-label-sm mb-1 uppercase tracking-wider">Top Rated</span>
+                            <h4 class="text-headline-lg font-headline-lg font-bold">CHROME OVERDRIVE</h4>
+                        </div>
+                    </div>
+                    <!-- Bento item 2 -->
+                    <div id="bento-2" class="group relative rounded-xl overflow-hidden cursor-pointer shadow-xl">
+                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANciaXwir4AG6g_ApOaa5ZCgGOsBf8D6FZ6CgTFyrG0bYMSuEJgS-tg5JFopl72FTUa67vC3_6GCx3U3VBtKY7-VVDVMOiE3veTuUJqvnMHn44JbfDAb3xhcN2_x6Li0U2rZRljzgo-VXM1gfeMqJq4Abe2a79kD-_MRodkM256i-Ri3fszw5JZ95k9NSOLEWvvy-yZ-NLiO2QOBxwkoXUR9ex7662avIigZHXRXNR2VKfSFQKSVHnI-eplEcen3wWozQs0TBMwRo" alt="Action 2"/>
+                        <div class="absolute inset-0 bg-black/35 group-hover:bg-black/20 transition-colors"></div>
+                    </div>
+                    <!-- Bento item 3 -->
+                    <div id="bento-3" class="group relative rounded-xl overflow-hidden cursor-pointer shadow-xl">
+                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCffU3XHVBFJFb_L4kp7y1h7JFqSuyFD7C25PLpodikDMJ70NRIVQule_VPzspUtONxzdEiGSaEQClaPisOtqP3_yFgz6Og-rSElLASsQpqNwnoYZFhdA-Tisk5G4kvYIrlLvCfOLOb7nsSKUWHZC2ckXAyO2Lc5IjN2deZRHbvLZr7IJopBoLrCBjZyZdRFTSuxEeYwvlBf0-bmkFwrLySka-I6qJwoHQ_3csvje0o6FEzNxocj8FS5aKZ524b-SHmKCAghVMm4go" alt="Action 3"/>
+                        <div class="absolute inset-0 bg-black/35 group-hover:bg-black/20 transition-colors"></div>
+                    </div>
+                    <!-- Bento item 4 -->
+                    <div id="bento-4" class="col-span-2 md:col-span-2 group relative rounded-xl overflow-hidden cursor-pointer shadow-2xl">
+                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEy_Hr9vjNMgojNLBDpiCa5Kp9ec26GqWI722EbFhlRSQqWPbDS_dRQCY1BSoOuPztszPZZ1HtDNKWZ9-94Two8dcOxc8hH1SfLr4cROplUrYV66ksMBx3yUm2ZIKSx0OmyjmLOI3TLa0J9WMhFBfLOKP_Bck0FetNELV_wAEzqiW5aozdFfCNWLjV55u_JmT1owEGJlqORhM6G0E37eqVM8FLepRDLF6fifaFQYR2oInDmlQUqtrnM6ge1J6i5nKi6UORXfdPQn4" alt="Desert Star"/>
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/90 to-transparent p-6 flex flex-col justify-center max-w-xs">
+                            <h4 class="text-headline-md font-headline-md font-bold mb-2">DESERT STAR</h4>
+                            <p class="text-label-sm font-label-sm text-on-surface-variant">O maior blockbuster de ficção científica pós-apocalíptica do ano já disponível.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Séries Premiadas -->
+            <section class="pl-edge-margin-mobile md:pl-edge-margin-desktop overflow-hidden">
+                <h3 class="text-headline-md font-headline-md mb-4 text-on-surface font-bold tracking-tight">Séries Premiadas</h3>
+                <div id="row-series" class="flex gap-gutter overflow-x-auto hide-scrollbar pr-edge-margin-mobile md:pr-edge-margin-desktop pb-4">
+                    <!-- Loaded dynamically -->
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <!-- ================= CATALOG SCREEN ================= -->
+    <div id="catalog-screen" class="view-section hidden pt-24 pb-stack-gap-lg">
+        <section class="max-w-container-max mx-auto px-edge-margin-mobile md:px-edge-margin-desktop">
+            <div class="mb-stack-gap-md flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <h1 id="catalog-title" class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-on-surface mb-2 tracking-tight font-extrabold">Catálogo</h1>
+                    <p id="catalog-desc" class="text-body-md text-on-secondary-container max-w-xl">Explore nossa curadoria de filmes e séries premium.</p>
+                </div>
+                <!-- Filters Bar -->
+                <div class="flex flex-wrap gap-3 items-center">
+                    <!-- Mobile inline search -->
+                    <div class="relative w-full md:hidden">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant select-none text-[20px]" style="min-width:unset;min-height:unset;">search</span>
+                        <input id="mobile-search-input" class="glass-input pl-10 pr-4 py-2.5 rounded-xl text-label-md font-label-md w-full" placeholder="Buscar filmes e séries..." type="text" oninput="handleSearch(this.value)" autocomplete="off"/>
+                    </div>
+                    <!-- Type tabs: Filmes / Séries / Tudo -->
+                    <div class="flex gap-2 w-full md:w-auto">
+                        <button id="tab-all"    onclick="setCatalogTab('all')"    class="tab-btn flex-1 md:flex-none px-4 py-2 rounded-full text-label-sm font-semibold transition-all bg-primary-container text-white">Tudo</button>
+                        <button id="tab-movies" onclick="setCatalogTab('movies')" class="tab-btn flex-1 md:flex-none px-4 py-2 rounded-full text-label-sm font-semibold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container-highest">Filmes</button>
+                        <button id="tab-series" onclick="setCatalogTab('series')" class="tab-btn flex-1 md:flex-none px-4 py-2 rounded-full text-label-sm font-semibold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container-highest">Séries</button>
+                    </div>
+                    <div class="relative hidden md:block">
+                        <select id="filter-genre" onchange="applyFilters()" class="appearance-none bg-surface-container-high text-on-surface text-label-sm font-label-sm px-6 py-2 pr-10 rounded-full border-none focus:ring-1 focus:ring-primary-container cursor-pointer">
+                            <option value="">Gênero: Todos</option>
+                            <option value="Sci-Fi">Ficção Científica</option>
+                            <option value="Thriller">Thriller</option>
+                            <option value="Action">Ação</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Mystery">Mistério</option>
+                            <option value="Horror">Terror</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Documentary">Documentário</option>
+                        </select>
+                    </div>
+                    <!-- Mobile genre: compact select -->
+                    <div class="relative md:hidden flex-1">
+                        <select id="filter-genre" onchange="applyFilters()" class="appearance-none bg-surface-container-high text-on-surface text-label-sm font-label-sm px-4 py-2.5 rounded-full border-none focus:ring-1 focus:ring-primary-container cursor-pointer w-full">
+                            <option value="">Gênero</option>
+                            <option value="Sci-Fi">Ficção Científica</option>
+                            <option value="Thriller">Thriller</option>
+                            <option value="Action">Ação</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Mystery">Mistério</option>
+                            <option value="Horror">Terror</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Documentary">Documentário</option>
+                        </select>
+                    </div>
+                    <div class="relative hidden md:block">
+                        <select id="filter-year" onchange="applyFilters()" class="appearance-none bg-surface-container-high text-on-surface text-label-sm font-label-sm px-6 py-2 pr-10 rounded-full border-none focus:ring-1 focus:ring-primary-container cursor-pointer">
+                            <option value="">Ano: Todos</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </div>
+                    <button onclick="clearFilters()" class="flex items-center gap-2 px-4 py-2 bg-surface-container-highest text-on-surface rounded-full hover:brightness-110 transition-all font-label-sm text-label-sm">
+                        <span class="material-symbols-outlined text-[18px]" style="min-width:unset;min-height:unset;">clear_all</span>
+                        <span class="hidden md:inline">Limpar</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Grid -->
+            <div id="catalog-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-gutter md:gap-stack-gap-md min-h-[400px]">
+                <!-- Movie Cards Loaded Dynamically -->
+            </div>
+            
+            <!-- Empty State -->
+            <div id="catalog-empty" class="hidden flex flex-col items-center justify-center py-20 text-center">
+                <span class="material-symbols-outlined text-6xl text-on-surface-variant mb-4 select-none">movie_filter</span>
+                <h3 class="text-headline-md font-bold mb-1">Nenhum título encontrado</h3>
+                <p class="text-on-secondary-container">Tente ajustar a sua busca ou filtros selecionados.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= EPISODES SCREEN ================= -->
+    <div id="episodes-screen" class="view-section hidden pt-20 pb-stack-gap-lg bg-surface min-h-screen">
+        <!-- Series hero backdrop -->
+        <div class="relative h-48 md:h-64 w-full overflow-hidden">
+            <img id="ep-backdrop" class="w-full h-full object-cover select-none" src="" alt=""/>
+            <div class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(19,19,19,0) 0%,#131313 100%),linear-gradient(to right,#131313 0%,transparent 60%)"></div>
+            <!-- Back button -->
+            <button onclick="routeTo('catalog')" class="absolute top-4 left-4 flex items-center gap-1 text-primary-container bg-black/50 backdrop-blur-md px-4 py-2 rounded-full text-label-md font-semibold active:scale-95 transition-all">
+                <span class="material-symbols-outlined select-none" style="min-width:unset;min-height:unset;font-size:20px;">arrow_back</span>
+                Catálogo
+            </button>
+        </div>
+
+        <div class="max-w-container-max mx-auto px-edge-margin-mobile md:px-edge-margin-desktop -mt-12 relative z-10">
+            <!-- Series info row -->
+            <div class="flex gap-5 items-end mb-8">
+                <img id="ep-poster" class="w-24 md:w-36 aspect-[2/3] rounded-xl object-cover shadow-2xl border border-white/10 flex-shrink-0 select-none" src="" alt=""/>
+                <div class="min-w-0 pb-1">
+                    <div id="ep-type-badge" class="inline-flex items-center gap-1 bg-primary-container/20 text-primary-container border border-primary-container/30 px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider mb-2">
+                        <span class="material-symbols-outlined text-[14px] select-none" style="min-width:unset;min-height:unset;">live_tv</span> Série
+                    </div>
+                    <h1 id="ep-title" class="text-xl md:text-3xl font-extrabold text-on-surface tracking-tight leading-tight truncate"></h1>
+                    <div class="flex flex-wrap gap-3 mt-2 text-label-sm text-on-surface-variant">
+                        <span id="ep-year"></span>
+                        <span>•</span>
+                        <span id="ep-seasons"></span>
+                        <span>•</span>
+                        <div class="flex items-center gap-1 text-primary-container">
+                            <span class="material-symbols-outlined text-[14px] select-none" style="font-variation-settings:'FILL' 1;min-width:unset;min-height:unset;">star</span>
+                            <span id="ep-rating"></span>
+                        </div>
+                    </div>
+                    <p id="ep-desc" class="text-label-sm text-on-surface-variant mt-2 line-clamp-2 hidden md:block"></p>
+                </div>
+            </div>
+
+            <!-- Season selector -->
+            <div class="flex items-center gap-3 mb-6 overflow-x-auto hide-scrollbar pb-2">
+                <span class="text-label-md font-semibold text-on-surface flex-shrink-0">Temporada:</span>
+                <div id="ep-season-tabs" class="flex gap-2 flex-shrink-0">
+                    <!-- Season buttons added dynamically -->
+                </div>
+            </div>
+
+            <!-- Episodes grid -->
+            <div id="ep-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Episodes loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= DETAILS SCREEN ================= -->
+    <div id="details-screen" class="view-section hidden relative bg-surface">
+        <!-- Hero Section -->
+        <section class="relative h-[70vh] md:h-[88vh] w-full overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img id="details-backdrop" class="w-full h-full object-cover select-none" src="" alt="Movie Backdrop"/>
+                <div class="absolute inset-0 scrim-details"></div>
+                <div class="absolute inset-0 scrim-left hidden md:block"></div>
+            </div>
+            <div class="relative z-10 h-full flex flex-col justify-end px-edge-margin-mobile md:px-edge-margin-desktop pb-8 max-w-container-max mx-auto">
+                <div class="max-w-2xl space-y-4">
+                    <button class="flex items-center gap-1 text-primary-container hover:text-white transition-colors text-label-md font-label-md mb-6 active:scale-95 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full w-max" onclick="routeTo('catalog')">
+                        <span class="material-symbols-outlined select-none">arrow_back</span>
+                        Voltar ao Catálogo
+                    </button>
+                    <h1 id="details-title" class="font-display-hero text-display-hero-mobile md:text-display-hero uppercase tracking-tighter leading-tight font-extrabold select-none">INTERSTELLAR II: O RETORNO</h1>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <span id="details-year" class="bg-surface-container-high text-on-tertiary-container px-3 py-1 rounded-lg text-label-md font-label-md">2024</span>
+                        <div class="flex items-center gap-1 text-primary-container">
+                            <span class="material-symbols-outlined text-base select-none" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span id="details-rating" class="text-on-surface font-label-md text-label-md">4.8/5</span>
+                        </div>
+                        <span id="details-duration" class="text-on-surface-variant font-label-md text-label-md">2h 45min</span>
+                        <div id="details-genres" class="flex gap-2">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+                    
+                    <p id="details-description" class="text-on-surface-variant font-body-lg text-body-lg leading-relaxed max-w-xl pt-2">
+                        Uma nova anomalia temporal ameaça a existência da humanidade, forçando uma equipe de exploradores a cruzar horizontes de eventos inexplorados. Uma jornada emocionante que redefine as leis da física e do amor.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <button id="details-play-btn" class="bg-primary-container text-white px-8 py-4 rounded-xl flex items-center gap-2 font-headline-md text-headline-md hover:brightness-125 transition-all active:scale-95 shadow-lg shadow-primary-container/20">
+                            <span class="material-symbols-outlined select-none" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                            Assistir Agora
+                        </button>
+                        <button id="bookmark-btn" class="bg-white/20 backdrop-blur-md text-on-surface px-8 py-4 rounded-xl flex items-center gap-2 font-headline-md text-headline-md hover:bg-white/30 transition-all active:scale-95 border border-white/10">
+                            <span id="bookmark-icon" class="material-symbols-outlined select-none">add</span>
+                            <span id="bookmark-text">Adicionar à Minha Lista</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cast & Details Section -->
+        <section class="max-w-container-max mx-auto px-edge-margin-mobile md:px-edge-margin-desktop py-stack-gap-lg space-y-12">
+            <!-- Cast -->
+            <div>
+                <h2 class="font-headline-lg text-headline-lg font-bold mb-6 tracking-tight">Elenco de Destaque</h2>
+                <div id="details-cast" class="flex gap-gutter overflow-x-auto pb-4 no-scrollbar">
+                    <!-- Actors Loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Similar Movies Row -->
+            <div>
+                <h2 class="font-headline-lg text-headline-lg font-bold mb-6 tracking-tight">Títulos Semelhantes</h2>
+                <div id="details-similar" class="flex gap-gutter overflow-x-auto pb-6 no-scrollbar">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= PLAYER SCREEN ================= -->
+    <div id="player-screen" class="view-section hidden pt-24 pb-stack-gap-lg">
+        <section class="max-w-5xl mx-auto px-edge-margin-mobile md:px-edge-margin-desktop">
+            <!-- Voltar Button & Title Header -->
+            <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <button class="flex items-center gap-1 text-primary-container hover:text-white transition-colors text-label-md font-label-md active:scale-95 bg-surface-container-high px-4 py-2 rounded-full w-max animate-pulse" id="player-back-btn">
+                    <span class="material-symbols-outlined select-none">arrow_back</span>
+                    Voltar aos Detalhes
+                </button>
+                <div class="text-right">
+                    <h2 id="player-movie-title" class="text-headline-md font-bold text-on-surface">Nome do Filme</h2>
+                    <p id="player-movie-info" class="text-label-sm text-on-surface-variant font-semibold">Ano • Gênero • Classificação</p>
+                </div>
+            </div>
+
+            <!-- Player Video Widescreen Frame -->
+            <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl border border-surface-variant/30">
+                <!-- Loader Placeholder -->
+                <div id="player-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-surface z-10 transition-opacity duration-300">
+                    <span class="material-symbols-outlined text-5xl text-primary-container animate-spin mb-4 select-none">progress_activity</span>
+                    <p class="text-label-md text-on-surface-variant">Carregando o player cinematográfico...</p>
+                </div>
+                <!-- Iframe -->
+                <iframe id="movie-player-iframe" class="w-full h-full border-none" allowfullscreen allow="autoplay; encrypted-media; gyroscope; picture-in-picture; clipboard-write; volume"></iframe>
+            </div>
+
+            <!-- Series Episode Selector (Hidden by default, shown for TV shows) -->
+            <div id="player-series-selector" class="hidden mt-6 bg-surface-container rounded-2xl p-6 border border-surface-variant/20 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-surface-variant/20 pb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary-container select-none">layers</span>
+                        <h3 class="text-headline-md font-bold text-on-surface">Temporadas & Episódios</h3>
+                    </div>
+                    <div class="relative">
+                        <select id="series-season-select" onchange="handleSeasonChange()" class="appearance-none bg-surface-container-high text-on-surface text-label-md font-semibold px-6 py-2.5 pr-10 rounded-xl border border-surface-variant/30 focus:ring-1 focus:ring-primary-container cursor-pointer min-w-[160px]">
+                            <!-- Options added dynamically -->
+                        </select>
+                        <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none select-none">expand_more</span>
+                    </div>
+                </div>
+                <!-- Episodes list -->
+                <div id="series-episodes-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-[300px] overflow-y-auto pr-2">
+                    <!-- Episodes loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Server Selector Bar -->
+            <div class="mt-6 flex flex-wrap gap-3 items-center justify-between bg-surface-container rounded-xl p-4 border border-surface-variant/20">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary-container select-none">dns</span>
+                    <span class="text-label-md font-semibold text-on-surface">Servidores de Transmissão:</span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="changePlayerServer(1)" id="server-btn-1" class="px-5 py-2 rounded-lg text-label-sm font-semibold transition-all hover:scale-105 active:scale-95 bg-primary-container text-white">
+                        🎬 Servidor 1 (RedeFlix)
+                    </button>
+                    <button onclick="changePlayerServer(2)" id="server-btn-2" class="px-5 py-2 rounded-lg text-label-sm font-semibold transition-all hover:scale-105 active:scale-95 bg-surface-container-high text-on-surface hover:bg-surface-container-highest">
+                        🛰️ Servidor 2 (VidSrc.me)
+                    </button>
+                    <button onclick="changePlayerServer(3)" id="server-btn-3" class="px-5 py-2 rounded-lg text-label-sm font-semibold transition-all hover:scale-105 active:scale-95 bg-surface-container-high text-on-surface hover:bg-surface-container-highest">
+                        📡 Servidor 3 (Embed.su)
+                    </button>
+                    <button onclick="changePlayerServer(4)" id="server-btn-4" class="px-5 py-2 rounded-lg text-label-sm font-semibold transition-all hover:scale-105 active:scale-95 bg-surface-container-high text-on-surface hover:bg-surface-container-highest">
+                        🌐 Servidor 4 (VidSrc.pm)
+                    </button>
+                    <button onclick="changePlayerServer(5)" id="server-btn-5" class="px-5 py-2 rounded-lg text-label-sm font-semibold transition-all hover:scale-105 active:scale-95 bg-surface-container-high text-on-surface hover:bg-surface-container-highest">
+                        🎥 Trailer (YouTube)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Warning/Instruction notice -->
+            <div class="mt-4 p-4 rounded-xl bg-primary-container/10 border border-primary-container/20 flex flex-col gap-3">
+                <div class="flex gap-3">
+                    <span class="material-symbols-outlined text-primary-container select-none">info</span>
+                    <p class="text-label-sm text-on-surface-variant leading-relaxed">
+                        <strong>Nota:</strong> Se o vídeo não carregar ou apresentar erros, tente alternar para os servidores alternativos ou o trailer. Alguns servidores podem exibir anúncios ou pop-ups independentes da STREAMFLIX. Recomendamos o uso de um bloqueador de anúncios para uma experiência ideal.
+                    </p>
+                </div>
+                <div class="flex gap-3 border-t border-primary-container/10 pt-3">
+                    <span class="material-symbols-outlined text-primary-container select-none animate-pulse">volume_up</span>
+                    <p class="text-label-sm text-on-surface font-semibold leading-relaxed">
+                        <strong>🔊 Vídeo sem som?</strong> Devido às políticas de segurança dos navegadores, a reprodução automática pode iniciar sem áudio. Se isso ocorrer, basta passar o mouse sobre o player de vídeo e clicar no ícone de alto-falante/volume no canto inferior direito do próprio player para reativar o som!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Synopsis & Info underneath -->
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 bg-surface-container-low p-6 rounded-2xl border border-surface-variant/20">
+                <div class="md:col-span-2 space-y-4">
+                    <h3 class="text-headline-md font-bold text-on-surface">Sinopse do Filme</h3>
+                    <p id="player-movie-desc" class="text-body-md text-on-surface-variant leading-relaxed">
+                        Carregando descrição detalhada...
+                    </p>
+                </div>
+                <div class="space-y-4 border-t md:border-t-0 md:border-l border-surface-variant/20 pt-4 md:pt-0 md:pl-6">
+                    <h3 class="text-label-md font-bold text-on-surface uppercase tracking-wider">Ficha Técnica</h3>
+                    <div class="space-y-2 text-label-sm text-on-surface">
+                        <p class="flex justify-between"><span class="text-on-surface-variant">Diretor:</span> <span id="player-movie-director" class="font-medium">Carregando...</span></p>
+                        <p class="flex justify-between"><span class="text-on-surface-variant">Prêmios:</span> <span id="player-movie-awards" class="font-medium">Carregando...</span></p>
+                        <p class="flex justify-between"><span class="text-on-surface-variant">IMDb:</span> <span id="player-movie-rating" class="font-medium text-primary-container">Carregando...</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= ADMIN SCREEN ================= -->
+    <div id="admin-screen" class="view-section hidden pt-24 pb-stack-gap-lg bg-[#0e0e0e] min-h-screen">
+        <section class="max-w-6xl mx-auto px-edge-margin-mobile md:px-edge-margin-desktop">
+            <!-- Header back to home -->
+            <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-surface-variant/20 pb-6">
+                <div>
+                    <h1 class="text-headline-lg font-headline-lg font-bold text-primary-container tracking-tight select-none">Painel Administrativo</h1>
+                    <p class="text-body-md text-on-surface-variant">Monitore os acessos, contas registradas e status premium da STREAMFLIX.</p>
+                </div>
+                <button onclick="routeTo('home')" class="flex items-center gap-1 text-primary-container hover:text-white transition-colors text-label-md font-label-md active:scale-95 bg-surface-container px-4 py-2 rounded-full w-max">
+                    <span class="material-symbols-outlined select-none">arrow_back</span>
+                    Voltar ao Início
+                </button>
+            </div>
+            
+            <!-- Dashboard Stats Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                <!-- Stat 1 -->
+                <div class="bg-surface-container rounded-2xl p-6 border border-white/5 shadow-xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-primary-container/10 text-primary-container flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-2xl select-none">group</span>
+                    </div>
+                    <div>
+                        <p class="text-xs text-on-surface-variant uppercase font-semibold">Total de Usuários</p>
+                        <h3 id="admin-stat-users" class="text-2xl font-bold text-on-surface mt-1">0</h3>
+                    </div>
+                </div>
+                <!-- Stat 2 -->
+                <div class="bg-surface-container rounded-2xl p-6 border border-white/5 shadow-xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-[#38bdf8]/10 text-[#38bdf8] flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-2xl select-none">visibility</span>
+                    </div>
+                    <div>
+                        <p class="text-xs text-on-surface-variant uppercase font-semibold">Total de Acessos</p>
+                        <h3 id="admin-stat-accesses" class="text-2xl font-bold text-on-surface mt-1">0</h3>
+                    </div>
+                </div>
+                <!-- Stat 3 -->
+                <div class="bg-surface-container rounded-2xl p-6 border border-white/5 shadow-xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-[#facc15]/10 text-[#facc15] flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-2xl select-none">star</span>
+                    </div>
+                    <div>
+                        <p class="text-xs text-on-surface-variant uppercase font-semibold">Contas Premium</p>
+                        <h3 id="admin-stat-premium" class="text-2xl font-bold text-on-surface mt-1">0</h3>
+                    </div>
+                </div>
+                <!-- Stat 4 -->
+                <div class="bg-surface-container rounded-2xl p-6 border border-white/5 shadow-xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-[#4ade80]/10 text-[#4ade80] flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-2xl select-none">paid</span>
+                    </div>
+                    <div>
+                        <p class="text-xs text-on-surface-variant uppercase font-semibold">Faturamento Estimado</p>
+                        <h3 id="admin-stat-revenue" class="text-2xl font-bold text-on-surface mt-1">R$ 0,00</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab content -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- User Accounts Table -->
+                <div class="bg-surface-container rounded-2xl p-6 border border-surface-variant/20 shadow-xl">
+                    <div class="flex items-center gap-2 mb-4 border-b border-surface-variant/20 pb-3">
+                        <span class="material-symbols-outlined text-primary-container select-none">contacts</span>
+                        <h3 class="text-headline-md font-bold text-on-surface">Contas de Usuários Cadastrados</h3>
+                    </div>
+                    <div class="overflow-x-auto max-h-[350px] overflow-y-auto pr-2">
+                        <table class="w-full text-left text-sm">
+                            <thead>
+                                <tr class="border-b border-surface-variant/20 text-on-surface-variant text-[11px] uppercase tracking-wider">
+                                    <th class="py-2.5">Nome</th>
+                                    <th class="py-2.5">E-mail</th>
+                                    <th class="py-2.5 text-center">Plano</th>
+                                    <th class="py-2.5 text-right">Data de Registro</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-users-table" class="divide-y divide-surface-variant/10 text-on-surface font-medium">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- View Access logs -->
+                <div class="bg-surface-container rounded-2xl p-6 border border-surface-variant/20 shadow-xl">
+                    <div class="flex items-center gap-2 mb-4 border-b border-surface-variant/20 pb-3">
+                        <span class="material-symbols-outlined text-primary-container select-none">history</span>
+                        <h3 class="text-headline-md font-bold text-on-surface">Log de Acessos a Filmes</h3>
+                    </div>
+                    <div class="overflow-x-auto max-h-[350px] overflow-y-auto pr-2">
+                        <table class="w-full text-left text-sm">
+                            <thead>
+                                <tr class="border-b border-surface-variant/20 text-on-surface-variant text-[11px] uppercase tracking-wider">
+                                    <th class="py-2.5">Usuário</th>
+                                    <th class="py-2.5">Filme/Série</th>
+                                    <th class="py-2.5 text-right">Data/Hora</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-logs-table" class="divide-y divide-surface-variant/10 text-on-surface font-medium text-xs">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-surface-variant relative z-30">
+    <div class="max-w-container-max mx-auto px-edge-margin-mobile md:px-edge-margin-desktop py-stack-gap-lg flex flex-col md:flex-row justify-between gap-stack-gap-md">
+        <div class="space-y-4">
+            <h2 class="text-headline-sm font-headline-sm font-extrabold text-on-surface tracking-tighter">STREAMFLIX</h2>
+            <p class="text-body-md text-on-secondary-container max-w-xs">
+                A melhor experiência em curadoria de cinema digital, streaming de alta fidelidade e design moderno diretamente no seu navegador.
+            </p>
+            <div class="flex gap-4">
+                <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer transition-colors select-none" data-icon="facebook">social_leaderboard</span>
+                <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer transition-colors select-none" data-icon="instagram">retweet</span>
+                <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer transition-colors select-none" data-icon="twitter">retweet</span>
+                <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer transition-colors select-none" data-icon="youtube">video_youtube</span>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+            <div class="flex flex-col gap-2">
+                <span class="text-label-md font-label-md text-on-surface font-semibold">Navegação</span>
+                <a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-colors" href="javascript:void(0)" onclick="routeTo('home')">Início</a>
+                <a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-colors" href="javascript:void(0)" onclick="routeTo('catalog')">Catálogo</a>
+                <a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-colors" href="./design_system.html">Design System</a>
+            </div>
+            <div class="flex flex-col gap-2">
+                <span class="text-label-md font-label-md text-on-surface font-semibold">Suporte</span>
+                <a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Ajuda</a>
+                <a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Termos de Uso</a>
+                <a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Privacidade</a>
+            </div>
+            <div class="flex flex-col gap-2">
+                <span class="text-label-md font-label-md text-on-surface font-semibold">Tecnologia</span>
+                <a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Stitch SDK</a>
+                <a class="text-label-sm font-label-sm text-on-secondary-container hover:text-primary-container underline transition-all" href="#">Torrentio API</a>
+            </div>
+        </div>
+        <div class="flex flex-col gap-4 items-start md:items-end">
+            <button class="border border-on-secondary-container text-on-secondary-container px-4 py-1 text-label-sm font-label-sm hover:bg-on-secondary-container hover:text-surface transition-colors">
+                Código de Serviço
+            </button>
+            <p class="text-label-sm font-label-sm text-on-secondary-container">© 2026 STREAMFLIX. TODOS OS DIREITOS RESERVADOS.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // =====================================================
+    // TMDb API — fonte principal de dados em pt-BR
+    // =====================================================
+    const TMDB_KEY  = window.__ENV__?.TMDB_API_KEY || '04c35731a5ee918f014970082a0088b1';
+    const TMDB_BASE = 'https://api.themoviedb.org/3';
+    const TMDB_IMG  = 'https://image.tmdb.org/t/p/w500';
+    const TMDB_BACK = 'https://image.tmdb.org/t/p/w1280';
+    const TMDB_LANG = 'pt-BR';
+
+    // Mapa de gênero TMDb (id → nome em português)
+    const TMDB_GENRE_MAP = {
+        28:'Ação',27:'Terror',12:'Aventura',16:'Animação',35:'Comédia',
+        80:'Crime',99:'Documentário',18:'Drama',10751:'Família',14:'Fantasia',
+        36:'História',10402:'Música',9648:'Mistério',10749:'Romance',
+        878:'Ficção Científica',10770:'Cinema TV',53:'Suspense',
+        10752:'Guerra',37:'Faroeste',10759:'Ação & Aventura',10762:'Kids',
+        10763:'Notícias',10764:'Reality',10765:'Sci-Fi & Fantasia',
+        10766:'Soap',10767:'Talk',10768:'Guerra & Política'
+    };
+
+    // Cache simples
+    const tmdbCache = {};
+
+    async function tmdbFetch(path, params = {}) {
+        const qs = new URLSearchParams({ api_key: TMDB_KEY, language: TMDB_LANG, ...params }).toString();
+        const url = `${TMDB_BASE}${path}?${qs}`;
+        if (tmdbCache[url]) return tmdbCache[url];
+        try {
+            const res = await fetch(url);
+            if (!res.ok) return null;
+            const data = await res.json();
+            tmdbCache[url] = data;
+            return data;
+        } catch (e) { return null; }
+    }
+
+    // Busca filmes por texto (retorna array normalizado)
+    async function omdbSearch(query, page = 1) {
+        const data = await tmdbFetch('/search/movie', { query, page, include_adult: false });
+        if (!data || !data.results || data.results.length === 0) return { Response: 'False' };
+        return {
+            Response: 'True',
+            Search: data.results.map(m => ({ ...m, _type: 'movie' })),
+            totalResults: String(data.total_results || data.results.length)
+        };
+    }
+
+    // Busca detalhes de um filme pelo imdbID (via find) ou tmdbId direto
+    async function omdbById(imdbId) {
+        // Se já é um número TMDb, tenta movie primeiro, depois tv
+        if (/^\d+$/.test(String(imdbId))) {
+            // Verifica tipo cacheado
+            const cachedType = tmdbCache[`__type__${imdbId}`];
+            const tryType = cachedType === 'series' ? 'tv' : 'movie';
+            const d = await tmdbFetch(`/${tryType}/${imdbId}`, { append_to_response: 'credits,external_ids' });
+            if (d && !d.status_code) {
+                tmdbCache[`__type__${imdbId}`] = tryType === 'tv' ? 'series' : 'movie';
+                return { ...d, _type: tryType, _source: 'tmdb' };
+            }
+            // Fallback: tenta o outro tipo
+            const altType = tryType === 'movie' ? 'tv' : 'movie';
+            const d2 = await tmdbFetch(`/${altType}/${imdbId}`, { append_to_response: 'credits,external_ids' });
+            if (d2 && !d2.status_code) {
+                tmdbCache[`__type__${imdbId}`] = altType === 'tv' ? 'series' : 'movie';
+                return { ...d2, _type: altType, _source: 'tmdb' };
+            }
+            return null;
+        }
+        // Resolve imdbID → tmdbId
+        const found = await tmdbFetch(`/find/${imdbId}`, { external_source: 'imdb_id' });
+        if (!found) return null;
+        const isTv = found.tv_results?.length > 0;
+        const item = found.movie_results?.[0] || found.tv_results?.[0];
+        if (!item) return null;
+        const type = isTv ? 'tv' : 'movie';
+        const detail = await tmdbFetch(`/${type}/${item.id}`, { append_to_response: 'credits,external_ids' });
+        if (!detail) return null;
+        // Salva o tipo no cache para uso futuro pelo id numérico
+        tmdbCache[`__type__${item.id}`] = isTv ? 'series' : 'movie';
+        return { ...detail, _type: type, _source: 'tmdb' };
+    }
+
+    // Normaliza resposta do TMDb para o formato interno
+    function normalizeMovie(m) {
+        // Suporte a resultado de search (results[]) e detalhe completo
+        const isDetail = !!m._source;
+        const isTv     = m._type === 'tv';
+
+        const title    = m.title || m.name || 'Sem título';
+        const year     = (m.release_date || m.first_air_date || '').slice(0, 4) || '—';
+        const rating   = m.vote_average ? m.vote_average.toFixed(1) : '?';
+        const runtime  = m.runtime ? `${m.runtime} min` : (m.episode_run_time?.[0] ? `${m.episode_run_time[0]} min` : '—');
+
+        const genreIds   = m.genre_ids  || (m.genres?.map(g => g.id)) || [];
+        const genreNames = m.genres?.map(g => g.name) || genreIds.map(id => TMDB_GENRE_MAP[id]).filter(Boolean);
+        const genres     = genreNames.length > 0 ? genreNames : ['—'];
+
+        const overview   = m.overview && m.overview.trim() ? m.overview : 'Descrição não disponível.';
+        const posterPath = m.poster_path   ? TMDB_IMG  + m.poster_path   : null;
+        const backdropPath = m.backdrop_path ? TMDB_BACK + m.backdrop_path : posterPath;
+
+        // Elenco (só disponível no detalhe)
+        const cast = m.credits?.cast?.slice(0, 8).map(a => ({
+            name: a.name,
+            char: a.character,
+            img: a.profile_path
+                ? `https://image.tmdb.org/t/p/w185${a.profile_path}`
+                : `https://ui-avatars.com/api/?name=${encodeURIComponent(a.name)}&background=201f1f&color=e5e2e1&size=128`
+        })) || [];
+
+        const director = m.credits?.crew?.find(c => c.job === 'Director')?.name || null;
+
+        // id externo: preferimos imdbID se disponível, caso contrário tmdb id como string
+        const externalImdb = m.external_ids?.imdb_id || m.imdb_id;
+        const id = externalImdb || String(m.id);
+
+        return {
+            id,
+            tmdbId: String(m.id),
+            title,
+            year,
+            rating,
+            duration: runtime,
+            genres,
+            description: overview,
+            poster:   posterPath   || `https://via.placeholder.com/300x450/131313/e50914?text=${encodeURIComponent(title)}`,
+            backdrop: backdropPath || `https://via.placeholder.com/1280x720/131313/e50914?text=${encodeURIComponent(title)}`,
+            cast,
+            director,
+            awards: null,
+            type: isTv ? 'series' : 'movie',
+            totalSeasons: m.number_of_seasons || null,
+        };
+    }
+
+    // Resolve imdbID → { id, type } no TMDb (mantido para compatibilidade com player)
+    async function getTmdbId(imdbId) {
+        // Se já é id numérico TMDb, usa o tipo armazenado no cache do filme atual
+        if (/^\d+$/.test(String(imdbId))) {
+            // Verifica se temos o tipo no currentPlayerMovie ou no cache de detalhes
+            const cached = tmdbCache[`__type__${imdbId}`];
+            const type = cached || 'movie';
+            return { id: Number(imdbId), type };
+        }
+        try {
+            const data = await tmdbFetch(`/find/${imdbId}`, { external_source: 'imdb_id' });
+            if (!data) return null;
+            if (data.movie_results?.length > 0) return { id: data.movie_results[0].id, type: 'movie' };
+            if (data.tv_results?.length    > 0) return { id: data.tv_results[0].id,    type: 'series' };
+            return null;
+        } catch (e) { return null; }
+    }
+
+    // Continue Watching progression trackers
+    function saveContinueWatching(film, progress = null, season = 1, episode = 1) {
+        if (!film || !film.id) return;
+        let list = JSON.parse(localStorage.getItem('streamflix_continue_watching')) || [];
+        const index = list.findIndex(item => item.id === film.id);
+        let existing = index > -1 ? list[index] : null;
+        
+        const newProgress = progress !== null ? progress : (existing ? existing.progress : 15);
+        
+        const item = {
+            id: film.id,
+            title: film.title,
+            poster: film.poster,
+            year: film.year,
+            type: film.type || 'movie',
+            progress: newProgress,
+            season: season,
+            episode: episode,
+            lastWatched: Date.now()
+        };
+        
+        if (index > -1) {
+            list.splice(index, 1);
+        }
+        list.unshift(item);
+        if (list.length > 8) list.pop();
+        
+        localStorage.setItem('streamflix_continue_watching', JSON.stringify(list));
+        renderContinueWatching();
+    }
+
+    function renderContinueWatching() {
+        const row = document.getElementById('row-continue');
+        if (!row) return;
+        const list = JSON.parse(localStorage.getItem('streamflix_continue_watching')) || [];
+        
+        if (list.length === 0) {
+            row.innerHTML = `
+                <div class="col-span-full py-8 text-left w-full">
+                    <div class="glass-input p-6 rounded-2xl border border-white/5 max-w-md backdrop-blur-md">
+                        <p class="text-label-md font-semibold text-on-surface flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary-container select-none">movie_filter</span>
+                            Nenhum título em andamento
+                        </p>
+                        <p class="text-label-sm text-on-surface-variant mt-2 leading-relaxed">
+                            Você ainda não começou a assistir a nenhum filme ou série. Escolha qualquer título no catálogo e clique em Assistir para iniciar seu histórico!
+                        </p>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        row.innerHTML = '';
+        list.forEach(item => {
+            const playArgs = item.type === 'series'
+                ? `'${item.id}', 1, ${item.season}, ${item.episode}`
+                : `'${item.id}'`;
+
+            row.insertAdjacentHTML('beforeend', `
+                <div onclick="playMovie(${playArgs})" class="group relative flex-none w-64 md:w-80 aspect-video rounded-lg overflow-hidden bg-surface-container-high transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer shadow-lg">
+                    <img class="w-full h-full object-cover select-none" src="${item.poster}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/320x180/1c1b1b/e50914?text=No+Image'"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                        <span class="text-label-md font-label-md text-white font-semibold truncate">${item.title}</span>
+                        <span class="text-label-sm font-label-sm text-on-surface-variant">
+                            ${item.type === 'series' ? `Temporada ${item.season}, Ep ${item.episode}` : item.year}
+                        </span>
+                    </div>
+                    <div class="absolute bottom-0 left-0 h-1 bg-surface-variant w-full">
+                        <div class="h-full bg-primary-container" style="width:${item.progress}%"></div>
+                    </div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span class="material-symbols-outlined text-white text-5xl select-none" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+                    </div>
+                </div>
+            `);
+        });
+    }
+
+    function startProgressTracking(film, season, episode) {
+        if (window.progressTimer) {
+            clearInterval(window.progressTimer);
+        }
+        let list = JSON.parse(localStorage.getItem('streamflix_continue_watching')) || [];
+        let existing = list.find(item => item.id === film.id);
+        let currentProgress = existing ? existing.progress : 15;
+        
+        window.progressTimer = setInterval(() => {
+            if (currentProgress < 95) {
+                currentProgress += 2;
+                saveContinueWatching(film, currentProgress, season, episode);
+            }
+        }, 5000);
+    }
+
+    // ---- Global state ----
+    let myBookmarks = JSON.parse(localStorage.getItem('streamflix_bookmarks')) || [];
+    let currentSearch = '';
+    let selectedGenre = '';
+    let selectedYear = '';
+    let catalogMovies = []; // currently displayed catalog movies
+    let currentPage = 1;
+    let totalCatalogResults = 0;
+    let isLoadingCatalog = false;
+
+    // Popular search terms to show in home rows and catalog
+    const HOME_QUERIES = {
+        popular: 'action',
+        trending: 'marvel',
+        drama: 'drama'
+    };
+    const CATALOG_DEFAULT_QUERY = 'movie';
+
+    // =====================================================
+    // INITIALIZATION
+    // =====================================================
+    window.addEventListener('DOMContentLoaded', async () => {
+        routeTo('home');
+
+        // Scroll glass header
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('top-app-bar');
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Load home data
+        loadHomeScreen();
+    });
+
+    // =====================================================
+    // HOME SCREEN
+    // =====================================================
+    async function loadHomeScreen() {
+        // Hero — trending do dia no TMDb (em pt-BR)
+        const trending = await tmdbFetch('/trending/movie/day');
+        if (trending && trending.results && trending.results.length > 0) {
+            // Pega o 1º com backdrop e overview
+            const hero = trending.results.find(m => m.backdrop_path && m.overview) || trending.results[0];
+            const m = normalizeMovie(hero);
+            const heroBg = document.getElementById('home-hero-bg');
+            heroBg.src = m.backdrop || m.poster;
+            heroBg.alt = m.title;
+            document.getElementById('home-hero-title').innerText = m.title.toUpperCase();
+            document.getElementById('home-hero-info').innerText = `${m.genres[0]} • ${m.year}`;
+            document.getElementById('home-hero-desc').innerText = m.description;
+            document.getElementById('home-hero-play-btn').onclick = () => playMovie(m.id);
+            document.getElementById('home-hero-info-btn').onclick = () => viewMovieDetails(m.id);
+        }
+
+        renderContinueWatching();
+        await Promise.all([
+            loadHomeRowTmdb('row-popular',  '/movie/popular'),
+            loadHomeRowTmdb('row-series',   '/tv/popular'),
+        ]);
+        loadBentoCards();
+    }
+
+    async function loadHomeRowTmdb(rowId, endpoint) {
+        const row = document.getElementById(rowId);
+        row.innerHTML = skeletonCards(6, 'poster');
+
+        const data = await tmdbFetch(endpoint);
+        if (!data || !data.results || data.results.length === 0) {
+            row.innerHTML = `<p class="text-on-surface-variant text-label-md py-4">Não foi possível carregar filmes.</p>`;
+            return;
+        }
+
+        row.innerHTML = '';
+        data.results.slice(0, 10).forEach(m => {
+            const movie = normalizeMovie(m);
+            row.insertAdjacentHTML('beforeend', `
+                <div onclick="viewMovieDetails('${movie.id}')" class="flex-none w-36 md:w-48 aspect-[2/3] rounded-lg overflow-hidden bg-surface-container transition-transform duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container cursor-pointer shadow-xl relative">
+                    <img class="w-full h-full object-cover select-none" src="${movie.poster}" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/192x288/1c1b1b/e50914?text=No+Image'"/>
+                    <div class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="material-symbols-outlined text-4xl text-white select-none">play_circle</span>
+                    </div>
+                </div>
+            `);
+        });
+    }
+
+    async function loadBentoCards() {
+        const data = await tmdbFetch('/movie/now_playing');
+        if (!data || !data.results) return;
+        const movies = data.results.filter(m => m.backdrop_path).slice(0, 4).map(normalizeMovie);
+
+        const bentoIds = ['bento-1', 'bento-2', 'bento-3', 'bento-4'];
+        bentoIds.forEach((id, i) => {
+            const el = document.getElementById(id);
+            if (!el || !movies[i]) return;
+            const m = movies[i];
+            el.onclick = () => viewMovieDetails(m.id);
+            const img = el.querySelector('img');
+            if (img) {
+                img.src = m.backdrop || m.poster;
+                img.alt = m.title;
+                img.onerror = () => { img.src = 'https://via.placeholder.com/600x400/1c1b1b/e50914?text=No+Image'; };
+            }
+            const h4 = el.querySelector('h4');
+            if (h4) h4.innerText = m.title.toUpperCase();
+        });
+    }
+
+    // Mapa gênero (valor do select) → ID TMDb
+    const GENRE_ID_MAP = {
+        'Sci-Fi': 878, 'Thriller': 53, 'Action': 28, 'Drama': 18,
+        'Mystery': 9648, 'Horror': 27, 'Romance': 10749, 'Documentary': 99
+    };
+
+    // Catalog tab state: 'all' | 'movies' | 'series'
+    let catalogTab = 'all';
+
+    function setCatalogTab(tab) {
+        catalogTab = tab;
+        document.querySelectorAll('.tab-btn').forEach(b => {
+            b.className = 'tab-btn flex-1 md:flex-none px-4 py-2 rounded-full text-label-sm font-semibold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container-highest';
+        });
+        const active = document.getElementById('tab-' + tab);
+        if (active) active.className = 'tab-btn flex-1 md:flex-none px-4 py-2 rounded-full text-label-sm font-semibold transition-all bg-primary-container text-white';
+        applyFilters();
+    }
+
+    // =====================================================
+    // CATALOG SCREEN
+    // =====================================================
+    async function loadCatalog(query, page = 1) {
+        if (isLoadingCatalog) return;
+        isLoadingCatalog = true;
+
+        const grid = document.getElementById('catalog-grid');
+        const empty = document.getElementById('catalog-empty');
+
+        if (page === 1) {
+            grid.innerHTML = skeletonCards(12, 'poster');
+            grid.classList.remove('hidden');
+            empty.classList.add('hidden');
+            catalogMovies = [];
+        } else {
+            const skels = document.createElement('div');
+            skels.id = 'loading-more';
+            skels.className = 'contents';
+            skels.innerHTML = skeletonCards(6, 'poster');
+            grid.appendChild(skels);
+        }
+
+        let moviesData = null;
+        let seriesData = null;
+        const pageParam = page;
+
+        if (catalogTab === 'movies') {
+            moviesData = await fetchCatalogData(query, 'movie', pageParam);
+        } else if (catalogTab === 'series') {
+            seriesData = await fetchCatalogData(query, 'tv', pageParam);
+        } else {
+            // 'all': load both in parallel
+            [moviesData, seriesData] = await Promise.all([
+                fetchCatalogData(query, 'movie', pageParam),
+                fetchCatalogData(query, 'tv', pageParam)
+            ]);
+        }
+
+        const loadingMore = document.getElementById('loading-more');
+        if (loadingMore) loadingMore.remove();
+
+        // Merge results: interleave movies and series
+        let results = [];
+        const mArr = moviesData?.Search || [];
+        const sArr = seriesData?.Search || [];
+        const maxLen = Math.max(mArr.length, sArr.length);
+        for (let i = 0; i < maxLen; i++) {
+            if (mArr[i]) results.push(mArr[i]);
+            if (sArr[i]) results.push(sArr[i]);
+        }
+
+        if (results.length === 0) {
+            if (page === 1) {
+                grid.innerHTML = '';
+                grid.classList.add('hidden');
+                empty.classList.remove('hidden');
+            }
+            isLoadingCatalog = false;
+            return;
+        }
+
+        totalCatalogResults = (parseInt(moviesData?.totalResults || 0) + parseInt(seriesData?.totalResults || 0));
+        currentPage = page;
+
+        const movies = results.map(m => normalizeMovie(m));
+
+        if (page === 1) {
+            grid.innerHTML = '';
+            catalogMovies = movies;
+        } else {
+            catalogMovies = [...catalogMovies, ...movies];
+        }
+
+        grid.classList.remove('hidden');
+        empty.classList.add('hidden');
+
+        movies.forEach(movie => {
+            grid.insertAdjacentHTML('beforeend', movieCardHTML(movie));
+        });
+
+        const existingLoadBtn = document.getElementById('load-more-btn');
+        if (existingLoadBtn) existingLoadBtn.remove();
+
+        if (catalogMovies.length < totalCatalogResults) {
+            const loadMoreBtn = document.createElement('div');
+            loadMoreBtn.id = 'load-more-btn';
+            loadMoreBtn.className = 'col-span-full flex justify-center py-6';
+            loadMoreBtn.innerHTML = `
+                <button onclick="loadMoreCatalog()" class="flex items-center gap-2 px-8 py-3 bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded-full transition-all text-label-md font-label-md hover:scale-105 active:scale-95">
+                    <span class="material-symbols-outlined select-none" style="min-width:unset;min-height:unset;">expand_more</span>
+                    Carregar Mais
+                </button>
+            `;
+            grid.parentElement.appendChild(loadMoreBtn);
+        }
+
+        isLoadingCatalog = false;
+    }
+
+    async function fetchCatalogData(query, mediaType, page) {
+        const genreEl = document.getElementById('filter-genre');
+        const yearEl  = document.getElementById('filter-year');
+        const genre = genreEl ? genreEl.value : '';
+        const year  = yearEl  ? yearEl.value  : '';
+
+        if (genre && GENRE_ID_MAP[genre]) {
+            const params = { page, with_genres: GENRE_ID_MAP[genre], sort_by: 'popularity.desc', include_adult: false };
+            if (year) {
+                if (mediaType === 'movie') params.primary_release_year = year;
+                else params.first_air_date_year = year;
+            }
+            const endpoint = mediaType === 'tv' ? '/discover/tv' : '/discover/movie';
+            const raw = await tmdbFetch(endpoint, params);
+            if (raw?.results?.length > 0) {
+                return {
+                    Response: 'True',
+                    Search: raw.results.map(m => ({ ...m, _type: mediaType })),
+                    totalResults: String(raw.total_results || raw.results.length)
+                };
+            }
+            return { Response: 'False' };
+        }
+
+        // Text search
+        const searchQuery = query || (mediaType === 'tv' ? 'popular series' : 'popular movie');
+        const endpoint = mediaType === 'tv' ? '/search/tv' : '/search/movie';
+
+        let data;
+        if (!query || query === CATALOG_DEFAULT_QUERY) {
+            // No query → use discover/trending
+            const discEndpoint = mediaType === 'tv' ? '/trending/tv/week' : '/trending/movie/week';
+            data = await tmdbFetch(discEndpoint, { page });
+        } else {
+            data = await tmdbFetch(endpoint, { query: searchQuery + (year ? ' ' + year : ''), page, include_adult: false });
+        }
+
+        if (!data || !data.results || data.results.length === 0) return { Response: 'False' };
+        return {
+            Response: 'True',
+            Search: data.results.map(m => ({ ...m, _type: mediaType })),
+            totalResults: String(data.total_results || data.results.length)
+        };
+    }
+
+    function movieCardHTML(movie) {
+        const isSeries = movie.type === 'series';
+        const clickAction = isSeries
+            ? `openEpisodesPage('${movie.id}')`
+            : `viewMovieDetails('${movie.id}')`;
+        const typeBadge = isSeries
+            ? `<span class="absolute top-2 left-2 bg-black/70 backdrop-blur-sm text-primary-container text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:12px;min-width:unset;min-height:unset;">live_tv</span>Série</span>`
+            : '';
+        return `
+            <div onclick="${clickAction}" class="movie-card group relative aspect-[2/3] bg-surface-container rounded-lg overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-primary-container shadow-lg">
+                <img class="w-full h-full object-cover select-none" src="${movie.poster}" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/300x450/1c1b1b/e50914?text=No+Image'" loading="lazy"/>
+                ${typeBadge}
+                <div class="card-overlay absolute inset-0 cinema-gradient opacity-0 transition-opacity duration-300 flex flex-col justify-end p-4">
+                    <h3 class="text-label-md font-label-md text-on-surface font-semibold leading-tight">${movie.title}</h3>
+                    <div class="flex items-center justify-between mt-1">
+                        <span class="text-label-sm font-label-sm text-on-surface-variant">${movie.year} • ${movie.genres[0]}</span>
+                        <div class="flex items-center gap-1 text-primary-container">
+                            <span class="material-symbols-outlined text-[14px] select-none" style="font-variation-settings: 'FILL' 1;min-width:unset;min-height:unset;">star</span>
+                            <span class="text-label-sm font-label-sm text-white font-medium">${movie.rating}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function loadMoreCatalog() {
+        const query = currentSearch || CATALOG_DEFAULT_QUERY;
+        loadCatalog(query, currentPage + 1);
+    }
+
+    // =====================================================
+    // SKELETON LOADERS
+    // =====================================================
+    function skeletonCards(count, type = 'poster') {
+        const aspect = type === 'video' ? 'aspect-video w-64 md:w-80 flex-none' : 'aspect-[2/3]';
+        let html = '';
+        for (let i = 0; i < count; i++) {
+            html += `<div class="${aspect} rounded-lg bg-surface-container-high animate-pulse relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-surface-bright/10 to-transparent skeleton-shimmer"></div>
+            </div>`;
+        }
+        return html;
+    }
+
+    // =====================================================
+    // VIEW ROUTER
+    // =====================================================
+    function routeTo(view) {
+        ['home-screen','catalog-screen','episodes-screen','details-screen','player-screen','admin-screen'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('hidden');
+        });
+
+        ['nav-home','nav-catalog','nav-mylist'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.remove('active-nav');
+        });
+
+        // Stop iframe playback and progress tracking when navigating away
+        const playerIframe = document.getElementById('movie-player-iframe');
+        if (playerIframe) playerIframe.src = '';
+        if (window.progressTimer) clearInterval(window.progressTimer);
+
+        // Update bottom nav
+        const bnMap = { home: 'bn-home', catalog: 'bn-catalog', mylist: 'bn-mylist' };
+        document.querySelectorAll('.bn-item').forEach(el => {
+            el.classList.remove('active');
+            const ico = el.querySelector('.material-symbols-outlined');
+            if (ico) ico.style.fontVariationSettings = '';
+        });
+        const bnId = bnMap[view];
+        if (bnId) {
+            const bnEl = document.getElementById(bnId);
+            if (bnEl) {
+                bnEl.classList.add('active');
+                const ico = bnEl.querySelector('.material-symbols-outlined');
+                if (ico) ico.style.fontVariationSettings = "'FILL' 1";
+            }
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        if (view === 'catalog') {
+            const navEl = document.getElementById('nav-catalog');
+            if (navEl) navEl.classList.add('active-nav');
+            document.getElementById('catalog-screen').classList.remove('hidden');
+            document.getElementById('catalog-title').innerText = 'Catálogo';
+            document.getElementById('catalog-desc').innerText = 'Explore filmes e séries premium da nossa curadoria.';
+            applyFilters();
+        } else if (view === 'mylist') {
+            const navEl = document.getElementById('nav-mylist');
+            if (navEl) navEl.classList.add('active-nav');
+            document.getElementById('catalog-screen').classList.remove('hidden');
+            document.getElementById('catalog-title').innerText = 'Minha Lista';
+            document.getElementById('catalog-desc').innerText = 'Seus títulos favoritos.';
+            renderMyList();
+        } else if (view === 'episodes') {
+            document.getElementById('episodes-screen').classList.remove('hidden');
+        } else if (view === 'details') {
+            document.getElementById('details-screen').classList.remove('hidden');
+        } else if (view === 'player') {
+            document.getElementById('player-screen').classList.remove('hidden');
+        } else if (view === 'admin') {
+            document.getElementById('admin-screen').classList.remove('hidden');
+            loadAdminDashboard();
+        } else {
+            const navEl = document.getElementById('nav-home');
+            if (navEl) navEl.classList.add('active-nav');
+            document.getElementById('home-screen').classList.remove('hidden');
+        }
+    }
+
+    // =====================================================
+    // SEARCH & FILTERS
+    // =====================================================
+    let searchDebounce = null;
+    function handleSearch(query) {
+        currentSearch = query.trim();
+        // Sync both search inputs
+        const headerInput = document.getElementById('header-search');
+        const mobileInput = document.getElementById('mobile-search-input');
+        if (headerInput && headerInput.value !== query) headerInput.value = query;
+        if (mobileInput && mobileInput.value !== query) mobileInput.value = query;
+        clearTimeout(searchDebounce);
+        searchDebounce = setTimeout(() => {
+            if (document.getElementById('catalog-screen').classList.contains('hidden')) {
+                routeTo('catalog');
+            } else {
+                applyFilters();
+            }
+        }, 400);
+    }
+
+    function applyFilters() {
+        const genreEl = document.getElementById('filter-genre');
+        const yearEl  = document.getElementById('filter-year');
+        selectedGenre = genreEl ? genreEl.value : '';
+        selectedYear  = yearEl  ? yearEl.value  : '';
+        const query = currentSearch || CATALOG_DEFAULT_QUERY;
+        loadCatalog(query, 1);
+    }
+
+    function clearFilters() {
+        const genreEl = document.getElementById('filter-genre');
+        const yearEl  = document.getElementById('filter-year');
+        const headerInput = document.getElementById('header-search');
+        const mobileInput = document.getElementById('mobile-search-input');
+        if (genreEl) genreEl.value = '';
+        if (yearEl)  yearEl.value  = '';
+        if (headerInput) headerInput.value = '';
+        if (mobileInput) mobileInput.value = '';
+        currentSearch = '';
+        selectedGenre = '';
+        selectedYear  = '';
+        catalogTab = 'all';
+        document.querySelectorAll('.tab-btn').forEach(b => {
+            b.className = 'tab-btn flex-1 md:flex-none px-4 py-2 rounded-full text-label-sm font-semibold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container-highest';
+        });
+        const tabAll = document.getElementById('tab-all');
+        if (tabAll) tabAll.className = 'tab-btn flex-1 md:flex-none px-4 py-2 rounded-full text-label-sm font-semibold transition-all bg-primary-container text-white';
+        loadCatalog(CATALOG_DEFAULT_QUERY, 1);
+    }
+
+    // =====================================================
+    // EPISODES PAGE (for TV series)
+    // =====================================================
+    let currentEpisodesSeriesId = null;
+    let currentEpisodesSeason = 1;
+
+    async function openEpisodesPage(imdbId) {
+        currentEpisodesSeriesId = imdbId;
+        currentEpisodesSeason = 1;
+        routeTo('episodes');
+
+        // Reset UI
+        document.getElementById('ep-title').innerText = 'Carregando...';
+        document.getElementById('ep-poster').src = '';
+        document.getElementById('ep-backdrop').src = '';
+        document.getElementById('ep-grid').innerHTML = skeletonCards(6, 'poster');
+        document.getElementById('ep-season-tabs').innerHTML = '';
+
+        const data = await omdbById(imdbId);
+        if (!data) {
+            document.getElementById('ep-title').innerText = 'Série não encontrada';
+            return;
+        }
+        const film = normalizeMovie(data);
+
+        // Fill header
+        document.getElementById('ep-title').innerText = film.title;
+        document.getElementById('ep-year').innerText = film.year;
+        document.getElementById('ep-rating').innerText = film.rating + '/10';
+        document.getElementById('ep-seasons').innerText = film.totalSeasons ? `${film.totalSeasons} temporada${film.totalSeasons > 1 ? 's' : ''}` : 'Temporadas';
+        document.getElementById('ep-desc').innerText = film.description;
+        document.getElementById('ep-poster').src = film.poster;
+        document.getElementById('ep-poster').onerror = () => { document.getElementById('ep-poster').src = 'https://via.placeholder.com/150x225/1c1b1b/e50914?text=No+Image'; };
+        document.getElementById('ep-backdrop').src = film.backdrop || film.poster;
+
+        // Season tabs
+        const totalSeasons = film.totalSeasons || 1;
+        const tabsEl = document.getElementById('ep-season-tabs');
+        tabsEl.innerHTML = '';
+        for (let s = 1; s <= totalSeasons; s++) {
+            const btn = document.createElement('button');
+            btn.id = `ep-season-btn-${s}`;
+            btn.innerText = `T${s}`;
+            btn.className = s === 1
+                ? 'px-4 py-2 rounded-full text-label-sm font-bold bg-primary-container text-white flex-shrink-0 transition-all'
+                : 'px-4 py-2 rounded-full text-label-sm font-semibold bg-surface-container-high text-on-surface hover:bg-surface-container-highest flex-shrink-0 transition-all';
+            btn.onclick = () => loadEpisodesTab(imdbId, s);
+            tabsEl.appendChild(btn);
+        }
+
+        // Load first season
+        await loadEpisodesTab(imdbId, 1);
+    }
+
+    async function loadEpisodesTab(imdbId, season) {
+        currentEpisodesSeason = season;
+
+        // Update season tab styles
+        const tabsEl = document.getElementById('ep-season-tabs');
+        if (tabsEl) {
+            Array.from(tabsEl.children).forEach((btn, i) => {
+                const s = i + 1;
+                btn.className = s === season
+                    ? 'px-4 py-2 rounded-full text-label-sm font-bold bg-primary-container text-white flex-shrink-0 transition-all'
+                    : 'px-4 py-2 rounded-full text-label-sm font-semibold bg-surface-container-high text-on-surface hover:bg-surface-container-highest flex-shrink-0 transition-all';
+            });
+        }
+
+        const grid = document.getElementById('ep-grid');
+        grid.innerHTML = `<div class="col-span-full flex justify-center py-12"><span class="material-symbols-outlined text-4xl text-primary-container animate-spin select-none">progress_activity</span></div>`;
+
+        try {
+            let tmdbId = null;
+            if (/^\d+$/.test(String(imdbId))) {
+                tmdbId = Number(imdbId);
+            } else {
+                const found = await tmdbFetch(`/find/${imdbId}`, { external_source: 'imdb_id' });
+                const item = found?.tv_results?.[0];
+                if (item) tmdbId = item.id;
+            }
+            if (!tmdbId) throw new Error('TMDB ID not found');
+
+            const data = await tmdbFetch(`/tv/${tmdbId}/season/${season}`);
+            if (!data || !data.episodes || data.episodes.length === 0) {
+                grid.innerHTML = `<p class="text-on-surface-variant text-label-md py-8 col-span-full text-center">Nenhum episódio encontrado para esta temporada.</p>`;
+                return;
+            }
+
+            grid.innerHTML = '';
+            data.episodes.forEach(ep => {
+                const epNum = ep.episode_number;
+                const thumb = ep.still_path
+                    ? `https://image.tmdb.org/t/p/w300${ep.still_path}`
+                    : `https://via.placeholder.com/300x170/1c1b1b/e50914?text=Ep+${epNum}`;
+                const runtime = ep.runtime ? `${ep.runtime} min` : '';
+                const rating = ep.vote_average ? ep.vote_average.toFixed(1) : '';
+                const airDate = ep.air_date ? new Date(ep.air_date).toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'numeric' }) : '';
+
+                grid.insertAdjacentHTML('beforeend', `
+                    <div onclick="playEpisodeFromEpPage('${imdbId}', ${season}, ${epNum})"
+                         class="group bg-surface-container rounded-xl overflow-hidden cursor-pointer border border-white/5 hover:border-primary-container/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shadow-lg">
+                        <!-- Thumbnail -->
+                        <div class="relative aspect-video overflow-hidden bg-surface-container-high">
+                            <img class="w-full h-full object-cover select-none group-hover:scale-105 transition-transform duration-500" src="${thumb}" alt="Episódio ${epNum}" onerror="this.src='https://via.placeholder.com/300x170/1c1b1b/e50914?text=Ep+${epNum}'"/>
+                            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="material-symbols-outlined text-white text-5xl drop-shadow-lg select-none" style="font-variation-settings:'FILL' 1;">play_circle</span>
+                            </div>
+                            <div class="absolute top-2 left-2 bg-black/70 backdrop-blur-sm text-primary-container text-[11px] font-bold px-2 py-0.5 rounded">
+                                Ep ${epNum}
+                            </div>
+                            ${runtime ? `<div class="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-on-surface-variant text-[10px] px-2 py-0.5 rounded">${runtime}</div>` : ''}
+                        </div>
+                        <!-- Info -->
+                        <div class="p-3">
+                            <h4 class="text-label-md font-semibold text-on-surface leading-tight mb-1 group-hover:text-primary-container transition-colors">${ep.name || `Episódio ${epNum}`}</h4>
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-[11px] text-on-surface-variant">${airDate}</span>
+                                ${rating ? `<div class="flex items-center gap-0.5 text-primary-container flex-shrink-0"><span class="material-symbols-outlined text-[12px] select-none" style="font-variation-settings:'FILL' 1;min-width:unset;min-height:unset;">star</span><span class="text-[11px] font-semibold text-on-surface">${rating}</span></div>` : ''}
+                            </div>
+                            ${ep.overview ? `<p class="text-[11px] text-on-surface-variant mt-1.5 line-clamp-2 leading-relaxed">${ep.overview}</p>` : ''}
+                        </div>
+                    </div>
+                `);
+            });
+        } catch (e) {
+            console.error('Erro ao carregar episódios:', e);
+            grid.innerHTML = `<p class="text-on-surface-variant text-label-md py-8 col-span-full text-center">Erro ao carregar episódios.</p>`;
+        }
+    }
+
+    function playEpisodeFromEpPage(imdbId, season, episode) {
+        // Load series details then go to player
+        omdbById(imdbId).then(data => {
+            if (!data) return;
+            const film = normalizeMovie(data);
+            playMovie(imdbId, 1, season, episode);
+        });
+    }
+
+    // =====================================================
+    // DETAILS SCREEN
+    // =====================================================
+    async function viewMovieDetails(imdbId) {
+        routeTo('details');
+
+        // Show loading state in details
+        document.getElementById('details-title').innerText = 'Carregando...';
+        document.getElementById('details-description').innerText = '';
+        document.getElementById('details-backdrop').src = '';
+        document.getElementById('details-genres').innerHTML = '';
+        document.getElementById('details-cast').innerHTML = skeletonCards(4, 'poster');
+        document.getElementById('details-similar').innerHTML = skeletonCards(5, 'poster');
+
+        const data = await omdbById(imdbId);
+        if (!data || !data.id && !data.tmdbId) {
+            document.getElementById('details-title').innerText = 'Filme não encontrado';
+            return;
+        }
+
+        const film = normalizeMovie(data);
+
+        document.getElementById('details-backdrop').src = film.poster;
+        document.getElementById('details-backdrop').onerror = function() {
+            this.src = 'https://via.placeholder.com/1280x720/131313/e50914?text=No+Image';
+        };
+        document.getElementById('details-title').innerText = film.title;
+        document.getElementById('details-year').innerText = film.year;
+        document.getElementById('details-rating').innerText = film.rating !== '?' ? film.rating + '/10' : 'N/A';
+        document.getElementById('details-duration').innerText = film.type === 'series' && film.totalSeasons ? `${film.totalSeasons} Temporada` + (film.totalSeasons > 1 ? 's' : '') : film.duration;
+        document.getElementById('details-description').innerText = film.description;
+
+        // Awards badge (if any)
+        if (film.awards) {
+            document.getElementById('details-description').innerText = film.description;
+        }
+
+        // Genres
+        const genresContainer = document.getElementById('details-genres');
+        genresContainer.innerHTML = '';
+        film.genres.forEach(g => {
+            genresContainer.insertAdjacentHTML('beforeend', `
+                <span class="px-3 py-0.5 border border-surface-variant text-on-surface-variant rounded-md text-label-sm font-label-sm">${g}</span>
+            `);
+        });
+
+        // Director
+        if (film.director) {
+            genresContainer.insertAdjacentHTML('beforeend', `
+                <span class="px-3 py-0.5 bg-primary-container/20 border border-primary-container/30 text-on-surface rounded-md text-label-sm font-label-sm">Dir: ${film.director}</span>
+            `);
+        }
+
+        // Cast
+        const castContainer = document.getElementById('details-cast');
+        castContainer.innerHTML = '';
+        if (film.cast.length > 0) {
+            film.cast.forEach(actor => {
+                castContainer.insertAdjacentHTML('beforeend', `
+                    <div class="flex-shrink-0 w-32 group cursor-pointer text-center">
+                        <div class="w-28 h-28 mx-auto rounded-full overflow-hidden border-2 border-transparent group-hover:border-primary-container transition-all duration-300 shadow-xl mb-2 bg-surface-container-high flex items-center justify-center">
+                            <span class="material-symbols-outlined text-5xl text-on-surface-variant select-none">person</span>
+                        </div>
+                        <p class="font-label-md text-label-md text-on-surface font-semibold truncate leading-tight">${actor.name}</p>
+                    </div>
+                `);
+            });
+        } else {
+            castContainer.innerHTML = `<p class="text-on-surface-variant text-label-md py-4">Informação de elenco indisponível.</p>`;
+        }
+
+        // Bookmark
+        updateBookmarkButton(film.id);
+        document.getElementById('bookmark-btn').onclick = () => toggleBookmark(film.id, film);
+        
+        // Play Movie Click
+        document.getElementById('details-play-btn').onclick = () => playMovie(film.id);
+
+        // Similar movies: search by first genre
+        loadSimilarMovies(film.genres[0], film.id);
+    }
+
+    // =====================================================
+    // MOVIE PLAYER CONTROLLER
+    // =====================================================
+    let currentPlayerImdbId = '';
+    let currentServerIndex = 1;
+    let currentPlayerMovie = null;
+    let currentSeason = 1;
+    let currentEpisode = 1;
+
+    async function playMovie(imdbId, serverIndex = 1, season = 1, episode = 1) {
+        currentPlayerImdbId = imdbId;
+        currentServerIndex = serverIndex;
+        currentSeason = season;
+        currentEpisode = episode;
+        
+        routeTo('player');
+
+        // Show loading state
+        const loader = document.getElementById('player-loader');
+        loader.classList.remove('opacity-0', 'pointer-events-none');
+        
+        // Fetch movie details if not in cache
+        const data = await omdbById(imdbId);
+        if (!data || !data.id && !data.tmdbId) {
+            document.getElementById('player-movie-title').innerText = 'Erro ao carregar';
+            return;
+        }
+
+        const film = normalizeMovie(data);
+        currentPlayerMovie = film;
+
+        // Set up player metadata details
+        document.getElementById('player-movie-title').innerText = film.title;
+        document.getElementById('player-movie-info').innerText = `${film.genres[0]} • ${film.year} • ${film.rating !== '?' ? film.rating + '/10' : 'N/A'}`;
+        document.getElementById('player-movie-desc').innerText = film.description;
+        document.getElementById('player-movie-director').innerText = film.director || 'Não informado';
+        document.getElementById('player-movie-awards').innerText = film.awards ? film.awards : 'Nenhum';
+        document.getElementById('player-movie-rating').innerText = film.rating !== '?' ? film.rating + '/10' : 'N/A';
+
+        // Set up back button link to details
+        document.getElementById('player-back-btn').onclick = () => {
+            viewMovieDetails(imdbId);
+        };
+
+        // Handle Series Selector rendering
+        const seriesSelector = document.getElementById('player-series-selector');
+        if (film.type === 'series') {
+            seriesSelector.classList.remove('hidden');
+            setupSeriesSelector(film, season, episode);
+        } else {
+            seriesSelector.classList.add('hidden');
+        }
+
+        // Save progress history and start tracking
+        saveContinueWatching(film, null, season, episode);
+        startProgressTracking(film, season, episode);
+
+        // Log access
+        const logFilm = { ...film };
+        if (film.type === 'series') {
+            logFilm.title = `${film.title} - Temporada ${season}, Ep ${episode}`;
+        }
+        logMovieAccess(logFilm);
+
+        // Load the actual video server source
+        loadPlayerIframe(imdbId, serverIndex, film.title, season, episode);
+    }
+
+    async function setupSeriesSelector(film, activeSeason, activeEpisode) {
+        const seasonSelect = document.getElementById('series-season-select');
+        seasonSelect.innerHTML = '';
+        
+        // Populate seasons
+        const totalSeasons = film.totalSeasons || 1;
+        for (let s = 1; s <= totalSeasons; s++) {
+            const opt = document.createElement('option');
+            opt.value = s;
+            opt.innerText = `Temporada ${s}`;
+            if (s === activeSeason) opt.selected = true;
+            seasonSelect.appendChild(opt);
+        }
+        
+        // Load episodes for the active season
+        await loadEpisodesForSeason(film.id, activeSeason, activeEpisode);
+    }
+
+    async function handleSeasonChange() {
+        const seasonSelect = document.getElementById('series-season-select');
+        const selectedSeason = parseInt(seasonSelect.value);
+        currentSeason = selectedSeason;
+        currentEpisode = 1; // reset episode to 1 on season change
+        
+        // Load episodes and play first one
+        await loadEpisodesForSeason(currentPlayerImdbId, selectedSeason, 1);
+        playEpisode(currentPlayerImdbId, selectedSeason, 1);
+    }
+
+    async function loadEpisodesForSeason(imdbId, season, activeEpisode) {
+        const container = document.getElementById('series-episodes-container');
+        container.innerHTML = `
+            <div class="col-span-full flex items-center justify-center py-8">
+                <span class="material-symbols-outlined text-3xl text-primary-container animate-spin select-none">progress_activity</span>
+            </div>
+        `;
+        
+        try {
+            let tmdbId = null;
+
+            // Se o id já é numérico, usa direto
+            if (/^\d+$/.test(String(imdbId))) {
+                tmdbId = Number(imdbId);
+            } else {
+                // Resolve imdbID → tmdbId via find
+                const found = await tmdbFetch(`/find/${imdbId}`, { external_source: 'imdb_id' });
+                const item = found?.tv_results?.[0] || found?.movie_results?.[0];
+                if (item) {
+                    tmdbId = item.id;
+                    // Salva tipo correto
+                    tmdbCache[`__type__${item.id}`] = found.tv_results?.length > 0 ? 'series' : 'movie';
+                }
+            }
+
+            if (!tmdbId) throw new Error('TMDB ID não encontrado');
+
+            const data = await tmdbFetch(`/tv/${tmdbId}/season/${season}`);
+            
+            if (!data || !data.episodes || data.episodes.length === 0) {
+                container.innerHTML = `<p class="text-on-surface-variant text-label-md py-4 col-span-full text-center">Nenhum episódio encontrado para esta temporada.</p>`;
+                return;
+            }
+            
+            container.innerHTML = '';
+            data.episodes.forEach(ep => {
+                const epNum = ep.episode_number;
+                const isActive = epNum === activeEpisode;
+                const activeClass = isActive 
+                    ? 'bg-primary-container/20 border-primary-container/50 text-white font-bold' 
+                    : 'bg-surface-container-high hover:bg-surface-container-highest border-surface-variant/30 text-on-surface';
+                
+                container.insertAdjacentHTML('beforeend', `
+                    <div onclick="playEpisode('${imdbId}', ${season}, ${epNum})" class="flex items-center gap-3 p-3 rounded-xl border ${activeClass} cursor-pointer transition-all hover:scale-[1.02] active:scale-95 animate-fadeIn">
+                        <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center flex-shrink-0 text-label-md font-bold text-primary-container select-none">
+                            ${epNum}
+                        </div>
+                        <div class="flex-grow min-w-0">
+                            <h4 class="text-label-sm font-semibold truncate leading-tight">${ep.name || `Episódio ${epNum}`}</h4>
+                            <p class="text-[11px] text-on-surface-variant flex items-center gap-1 mt-0.5">
+                                <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                ${ep.vote_average ? ep.vote_average.toFixed(1) : 'N/A'}
+                            </p>
+                        </div>
+                        <span class="material-symbols-outlined text-primary-container select-none">${isActive ? 'pause_circle' : 'play_circle'}</span>
+                    </div>
+                `);
+            });
+        } catch (e) {
+            console.error('Erro ao carregar episódios:', e);
+            container.innerHTML = `<p class="text-on-surface-variant text-label-md py-4 col-span-full text-center">Erro ao carregar episódios.</p>`;
+        }
+    }
+
+    function playEpisode(imdbId, season, episode) {
+        currentSeason = season;
+        currentEpisode = episode;
+        
+        // Update styling of the episode list items to reflect selection
+        const container = document.getElementById('series-episodes-container');
+        const items = container.children;
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            const epNum = i + 1;
+            const isActive = epNum === episode;
+            const playIcon = item.querySelector('.material-symbols-outlined:last-child');
+            
+            if (isActive) {
+                item.className = "flex items-center gap-3 p-3 rounded-xl border bg-primary-container/20 border-primary-container/50 text-white font-bold cursor-pointer transition-all hover:scale-[1.02] active:scale-95";
+                if (playIcon) playIcon.innerText = 'pause_circle';
+            } else {
+                item.className = "flex items-center gap-3 p-3 rounded-xl border bg-surface-container-high hover:bg-surface-container-highest border-surface-variant/30 text-on-surface cursor-pointer transition-all hover:scale-[1.02] active:scale-95";
+                if (playIcon) playIcon.innerText = 'play_circle';
+            }
+        }
+        
+        // Update metadata
+        document.getElementById('player-movie-info').innerText = `${currentPlayerMovie.genres[0]} • Temporada ${season}, Ep ${episode} • ${currentPlayerMovie.rating !== '?' ? currentPlayerMovie.rating + '/10' : 'N/A'}`;
+        
+        // Save progression and restart tracking
+        saveContinueWatching(currentPlayerMovie, null, season, episode);
+        startProgressTracking(currentPlayerMovie, season, episode);
+
+        // Log access
+        const logFilm = { ...currentPlayerMovie };
+        logFilm.title = `${currentPlayerMovie.title} - Temporada ${season}, Ep ${episode}`;
+        logMovieAccess(logFilm);
+
+        // Load in iframe
+        loadPlayerIframe(imdbId, currentServerIndex, currentPlayerMovie.title, season, episode);
+    }
+
+    async function getYoutubeTrailerKey(imdbId) {
+        try {
+            const resolution = await getTmdbId(imdbId);
+            if (!resolution || !resolution.id) return null;
+            
+            const tmdbId = resolution.id;
+            const type = currentPlayerMovie && currentPlayerMovie.type === 'series' ? 'tv' : 'movie';
+
+            // Tenta em português primeiro, depois inglês como fallback
+            let data = await tmdbFetch(`/${type}/${tmdbId}/videos`, { language: 'pt-BR' });
+            if (!data?.results?.length) {
+                data = await tmdbFetch(`/${type}/${tmdbId}/videos`, { language: 'en-US' });
+            }
+            
+            if (data?.results?.length > 0) {
+                const trailer = data.results.find(v => v.type === 'Trailer' && v.site === 'YouTube') ||
+                                data.results.find(v => v.site === 'YouTube');
+                if (trailer) return trailer.key;
+            }
+        } catch (e) {
+            console.error('Error fetching YouTube trailer key:', e);
+        }
+        return null;
+    }
+
+    async function loadPlayerIframe(imdbId, serverIndex, title = '', season = 1, episode = 1) {
+        const iframe = document.getElementById('movie-player-iframe');
+        const loader = document.getElementById('player-loader');
+        
+        // Clear old src to trigger loading state cleanly
+        iframe.src = '';
+        loader.classList.remove('opacity-0', 'pointer-events-none');
+
+        // Style the active server button
+        for (let i = 1; i <= 5; i++) {
+            const btn = document.getElementById(`server-btn-${i}`);
+            if (btn) {
+                if (i === serverIndex) {
+                    btn.className = "px-5 py-2 rounded-lg text-label-sm font-semibold transition-all hover:scale-105 active:scale-95 bg-primary-container text-white";
+                } else {
+                    btn.className = "px-5 py-2 rounded-lg text-label-sm font-semibold transition-all hover:scale-105 active:scale-95 bg-surface-container-high text-on-surface hover:bg-surface-container-highest";
+                }
+            }
+        }
+
+        let embedUrl = '';
+        if (serverIndex === 1) {
+            // Servidor 1 (RedeFlix - Principal)
+            // Resolve TMDB ID in background
+            const resolution = await getTmdbId(imdbId);
+            if (resolution && resolution.id) {
+                const tmdbId = resolution.id;
+                if (currentPlayerMovie && currentPlayerMovie.type === 'series') {
+                    embedUrl = `https://redeflixapi.store/serie/${tmdbId}/${season}/${episode}`;
+                } else {
+                    embedUrl = `https://redeflixapi.store/filme/${tmdbId}`;
+                }
+            } else {
+                // Fallback to VidSrc.me if resolution fails
+                if (currentPlayerMovie && currentPlayerMovie.type === 'series') {
+                    embedUrl = `https://vidsrc.me/embed/tv/${imdbId}/${season}/${episode}`;
+                } else {
+                    embedUrl = `https://vidsrc.me/embed/movie/${imdbId}`;
+                }
+            }
+        } else if (serverIndex === 2) {
+            // Servidor 2 (VidSrc.me - Alternativo A)
+            if (currentPlayerMovie && currentPlayerMovie.type === 'series') {
+                embedUrl = `https://vidsrc.me/embed/tv/${imdbId}/${season}/${episode}`;
+            } else {
+                embedUrl = `https://vidsrc.me/embed/movie/${imdbId}`;
+            }
+        } else if (serverIndex === 3) {
+            // Servidor 3 (Embed.su - Alternativo B)
+            if (currentPlayerMovie && currentPlayerMovie.type === 'series') {
+                embedUrl = `https://embed.su/embed/tv/${imdbId}/${season}/${episode}`;
+            } else {
+                embedUrl = `https://embed.su/embed/movie/${imdbId}`;
+            }
+        } else if (serverIndex === 4) {
+            // Servidor 4 (VidSrc.pm - Alternativo C)
+            if (currentPlayerMovie && currentPlayerMovie.type === 'series') {
+                embedUrl = `https://vidsrc.pm/embed/tv/${imdbId}/${season}/${episode}`;
+            } else {
+                embedUrl = `https://vidsrc.pm/embed/movie/${imdbId}`;
+            }
+        } else {
+            // Servidor 5: YouTube Trailer
+            const key = await getYoutubeTrailerKey(imdbId);
+            if (key) {
+                embedUrl = `https://www.youtube.com/embed/${key}?autoplay=1`;
+            } else {
+                const searchTitle = encodeURIComponent(`${title} official trailer`);
+                embedUrl = `https://www.youtube.com/embed?listType=search&list=${searchTitle}&autoplay=1`;
+            }
+        }
+
+        iframe.src = embedUrl;
+
+        // Hide loader once iframe has fully loaded
+        iframe.onload = () => {
+            loader.classList.add('opacity-0', 'pointer-events-none');
+            // reset loader text for next load
+            const loaderText = loader.querySelector('p');
+            if (loaderText) {
+                loaderText.innerText = 'Carregando o player cinematográfico...';
+            }
+        };
+    }
+
+    function changePlayerServer(serverIndex) {
+        if (currentPlayerImdbId) {
+            currentServerIndex = serverIndex;
+            loadPlayerIframe(currentPlayerImdbId, serverIndex, currentPlayerMovie ? currentPlayerMovie.title : '', currentSeason, currentEpisode);
+        }
+    }
+
+    async function loadSimilarMovies(genre, excludeId) {
+        const container = document.getElementById('details-similar');
+        container.innerHTML = skeletonCards(5, 'poster');
+
+        // Resolve o tmdbId do filme atual para usar /recommendations
+        const resolution = await getTmdbId(excludeId);
+        let results = [];
+
+        if (resolution?.id) {
+            const type = resolution.type === 'series' ? 'tv' : 'movie';
+            const data = await tmdbFetch(`/${type}/${resolution.id}/recommendations`);
+            results = data?.results || [];
+        }
+
+        // Fallback: busca por gênero se não tiver recomendações
+        if (results.length === 0) {
+            const data = await omdbSearch(genre);
+            results = data?.Search || [];
+        }
+
+        container.innerHTML = '';
+        if (results.length === 0) {
+            container.innerHTML = `<p class="text-on-surface-variant text-label-md py-4">Nenhum título semelhante encontrado.</p>`;
+            return;
+        }
+
+        results.filter(m => {
+            const norm = normalizeMovie(m);
+            return norm.id !== excludeId;
+        }).slice(0, 8).forEach(m => {
+            const movie = normalizeMovie(m);
+            container.insertAdjacentHTML('beforeend', `
+                <div onclick="viewMovieDetails('${movie.id}')" class="flex-shrink-0 w-40 md:w-56 group cursor-pointer">
+                    <div class="aspect-[2/3] rounded-xl overflow-hidden bg-surface-container relative mb-3 group-hover:scale-105 group-hover:ring-2 group-hover:ring-primary-container transition-all duration-300 shadow-2xl">
+                        <img class="w-full h-full object-cover select-none" src="${movie.poster}" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/224x336/1c1b1b/e50914?text=No+Image'" loading="lazy"/>
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="material-symbols-outlined text-4xl text-white select-none">play_circle</span>
+                        </div>
+                    </div>
+                    <h3 class="font-label-md text-label-md text-on-surface font-bold group-hover:text-primary-container transition-colors truncate">${movie.title}</h3>
+                    <p class="text-on-surface-variant font-label-sm text-label-sm">${movie.genres[0]} • ${movie.year}</p>
+                </div>
+            `);
+        });
+    }
+
+    // =====================================================
+    // BOOKMARKS
+    // =====================================================
+    // Store full movie data in bookmarks for offline "My List"
+    let bookmarkMovieData = JSON.parse(localStorage.getItem('streamflix_bookmark_data')) || {};
+
+    function toggleBookmark(movieId, filmData) {
+        const index = myBookmarks.indexOf(movieId);
+        if (index > -1) {
+            myBookmarks.splice(index, 1);
+            delete bookmarkMovieData[movieId];
+        } else {
+            myBookmarks.push(movieId);
+            if (filmData) bookmarkMovieData[movieId] = filmData;
+        }
+        localStorage.setItem('streamflix_bookmarks', JSON.stringify(myBookmarks));
+        localStorage.setItem('streamflix_bookmark_data', JSON.stringify(bookmarkMovieData));
+        updateBookmarkButton(movieId);
+    }
+
+    function updateBookmarkButton(movieId) {
+        const isBookmarked = myBookmarks.includes(movieId);
+        const icon = document.getElementById('bookmark-icon');
+        const text = document.getElementById('bookmark-text');
+        const btn = document.getElementById('bookmark-btn');
+        if (isBookmarked) {
+            icon.innerText = 'check';
+            text.innerText = 'Na Minha Lista';
+            btn.classList.add('bg-primary-container/20', 'border-primary-container/40');
+        } else {
+            icon.innerText = 'add';
+            text.innerText = 'Adicionar à Minha Lista';
+            btn.classList.remove('bg-primary-container/20', 'border-primary-container/40');
+        }
+    }
+
+    function renderMyList() {
+        const grid = document.getElementById('catalog-grid');
+        const empty = document.getElementById('catalog-empty');
+        grid.innerHTML = '';
+
+        const bookmarkedMovies = myBookmarks
+            .map(id => bookmarkMovieData[id])
+            .filter(Boolean);
+
+        // Also filter by search
+        const filtered = currentSearch
+            ? bookmarkedMovies.filter(m => m.title.toLowerCase().includes(currentSearch.toLowerCase()))
+            : bookmarkedMovies;
+
+        if (filtered.length === 0) {
+            grid.classList.add('hidden');
+            empty.classList.remove('hidden');
+            return;
+        }
+
+        grid.classList.remove('hidden');
+        empty.classList.add('hidden');
+        filtered.forEach(movie => grid.insertAdjacentHTML('beforeend', movieCardHTML(movie)));
+    }
+
+    // =====================================================
+    // GOOGLE/GMAIL USER AUTHENTICATION & ADMIN PORTAL
+    // =====================================================
+    function checkUserLogin() {
+        const user = JSON.parse(localStorage.getItem('streamflix_user'));
+        const loginScreen = document.getElementById('google-login-screen');
+        
+        if (!user) {
+            loginScreen.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        } else {
+            loginScreen.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            updateNavbarUser(user);
+            
+            // Adjust premium badge and button
+            const statusBadge = document.getElementById('user-status-badge');
+            const upgradeBtn = document.getElementById('upgrade-premium-btn');
+            const adminBtn = document.getElementById('dropdown-admin-entry');
+            
+            if (statusBadge) {
+                if (user.status === 'premium') {
+                    statusBadge.innerText = 'Premium';
+                    statusBadge.className = "px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-[#facc15]/20 text-[#facc15] border border-[#facc15]/30";
+                    if (upgradeBtn) upgradeBtn.classList.add('hidden');
+                    if (adminBtn) adminBtn.classList.add('hidden');
+                } else if (user.status === 'admin') {
+                    statusBadge.innerText = 'Admin';
+                    statusBadge.className = "px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-primary-container/20 text-primary-container border border-primary-container/30 animate-pulse";
+                    if (upgradeBtn) upgradeBtn.classList.add('hidden');
+                    if (adminBtn) adminBtn.classList.remove('hidden');
+                } else {
+                    statusBadge.innerText = 'Grátis';
+                    statusBadge.className = "px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-surface-container-highest text-on-surface-variant border border-white/5";
+                    if (upgradeBtn) upgradeBtn.classList.remove('hidden');
+                    if (adminBtn) adminBtn.classList.add('hidden');
+                }
+            }
+            
+            // Inject ads dynamically based on status
+            injectAds();
+        }
+    }
+
+    function injectAds() {
+        const user = JSON.parse(localStorage.getItem('streamflix_user'));
+        const existingAd = document.getElementById('ad-script');
+        
+        // If logged in and premium or admin, do not inject ads (and remove if exists)
+        if (user && (user.status === 'premium' || user.status === 'admin')) {
+            if (existingAd) existingAd.remove();
+            return;
+        }
+        
+        // Otherwise, inject the specified script tag automatically for free users
+        if (!existingAd) {
+            const script = document.createElement('script');
+            script.id = 'ad-script';
+            script.src = 'https://pl29544089.effectivecpmnetwork.com/cb/e1/e1/cbe1e1a6fa0f2d447f3bde5f2aaec646.js';
+            document.body.appendChild(script);
+        }
+    }
+
+    function toggleAuthTab(tab) {
+        const tabLogin = document.getElementById('tab-login');
+        const tabRegister = document.getElementById('tab-register');
+        const formLogin = document.getElementById('auth-login-form');
+        const formRegister = document.getElementById('auth-register-form');
+        const adminForm = document.getElementById('admin-login-form');
+        
+        // Hide admin if visible
+        adminForm.classList.add('hidden');
+        document.getElementById('auth-tabs').classList.remove('hidden');
+        
+        if (tab === 'login') {
+            tabLogin.className = "py-2 rounded-lg text-xs font-bold transition-all bg-primary-container text-white";
+            tabRegister.className = "py-2 rounded-lg text-xs font-bold transition-all text-on-surface-variant hover:text-on-surface";
+            formLogin.classList.remove('hidden');
+            formRegister.classList.add('hidden');
+        } else {
+            tabRegister.className = "py-2 rounded-lg text-xs font-bold transition-all bg-[#4ade80] text-black";
+            tabLogin.className = "py-2 rounded-lg text-xs font-bold transition-all text-on-surface-variant hover:text-on-surface";
+            formRegister.classList.remove('hidden');
+            formLogin.classList.add('hidden');
+        }
+    }
+
+    function handleCustomRegister(event) {
+        event.preventDefault();
+        const nameInput = document.getElementById('register-name');
+        const emailInput = document.getElementById('register-email');
+        const passwordInput = document.getElementById('register-password');
+        
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim().toLowerCase();
+        const password = passwordInput.value;
+        
+        if (!name || !email || !password) {
+            alert('Por favor, preencha todos os campos.');
+            return;
+        }
+        
+        let allUsers = JSON.parse(localStorage.getItem('streamflix_all_users')) || [];
+        
+        if (allUsers.some(u => u.email === email)) {
+            alert('Um usuário com este e-mail já existe. Escolha outro ou faça login.');
+            return;
+        }
+        
+        const initial = name.charAt(0).toUpperCase();
+        const user = {
+            name: name,
+            email: email,
+            password: password,
+            initial: initial,
+            status: 'free',
+            joined: new Date().toLocaleDateString('pt-BR')
+        };
+        
+        allUsers.push(user);
+        localStorage.setItem('streamflix_all_users', JSON.stringify(allUsers));
+        localStorage.setItem('streamflix_user', JSON.stringify(user));
+        
+        // Clear inputs
+        nameInput.value = '';
+        emailInput.value = '';
+        passwordInput.value = '';
+        
+        checkUserLogin();
+        showWelcomeToast(name);
+    }
+
+    function handleCustomLogin(event) {
+        event.preventDefault();
+        const emailInput = document.getElementById('login-email');
+        const passwordInput = document.getElementById('login-password');
+        
+        const email = emailInput.value.trim().toLowerCase();
+        const password = passwordInput.value;
+        
+        if (!email || !password) {
+            alert('Por favor, preencha todos os campos.');
+            return;
+        }
+        
+        let allUsers = JSON.parse(localStorage.getItem('streamflix_all_users')) || [];
+        const user = allUsers.find(u => u.email === email);
+        
+        if (!user || user.password !== password) {
+            alert('E-mail ou senha incorretos. Tente novamente.');
+            return;
+        }
+        
+        localStorage.setItem('streamflix_user', JSON.stringify(user));
+        
+        // Clear inputs
+        emailInput.value = '';
+        passwordInput.value = '';
+        
+        checkUserLogin();
+        showWelcomeToast(user.name);
+    }
+
+    function updateNavbarUser(user) {
+        const avatar = document.getElementById('nav-user-avatar');
+        if (avatar) {
+            avatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=e50914&color=white&size=128`;
+        }
+        
+        const initialDiv = document.getElementById('dropdown-user-initial');
+        if (initialDiv) initialDiv.innerText = user.initial;
+        
+        const nameP = document.getElementById('dropdown-user-name');
+        if (nameP) nameP.innerText = user.name;
+        
+        const emailP = document.getElementById('dropdown-user-email');
+        if (emailP) emailP.innerText = user.email;
+    }
+
+    function logoutUser() {
+        localStorage.removeItem('streamflix_user');
+        document.getElementById('user-profile-menu').classList.add('hidden');
+        checkUserLogin();
+    }
+
+    function toggleUserMenu(event) {
+        event.stopPropagation();
+        const menu = document.getElementById('user-profile-menu');
+        menu.classList.toggle('hidden');
+    }
+
+    // Close menu when clicking outside
+    window.addEventListener('click', () => {
+        const menu = document.getElementById('user-profile-menu');
+        if (menu) menu.classList.add('hidden');
+    });
+
+    function showWelcomeToast(name) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-6 right-6 z-[120] bg-primary-container text-white px-6 py-4 rounded-xl border border-white/10 shadow-2xl flex items-center gap-3 backdrop-blur-md transition-all duration-500 ease-out translate-y-12 opacity-0';
+        toast.innerHTML = `
+            <span class="material-symbols-outlined select-none text-2xl animate-bounce">check_circle</span>
+            <div>
+                <p class="text-label-md font-bold leading-none">Acesso Concedido</p>
+                <p class="text-xs text-on-primary-container mt-1">Bem-vindo(a) de volta, ${name}!</p>
+            </div>
+        `;
+        document.body.appendChild(toast);
+        
+        // Trigger slide in
+        setTimeout(() => {
+            toast.classList.remove('translate-y-12', 'opacity-0');
+        }, 100);
+
+        setTimeout(() => {
+            toast.classList.add('translate-y-12', 'opacity-0');
+            setTimeout(() => toast.remove(), 500);
+        }, 4000);
+    }
+
+    // =====================================================
+    // MERCADO PAGO PREMIUM CHECKOUT FLOW
+    // =====================================================
+    const MP_PUBLIC_KEY = 'TEST-824efd58-0610-4a98-befc-f1a2e840b3ea';
+    const MP_ACCESS_TOKEN = 'TEST-2469158009912753-052419-e8199cef8738e49d43e313469925224a-1016180065';
+
+    function openCheckout() {
+        document.getElementById('user-profile-menu').classList.add('hidden');
+        document.getElementById('premium-checkout-modal').classList.remove('hidden');
+    }
+
+    function closeCheckout() {
+        document.getElementById('premium-checkout-modal').classList.add('hidden');
+    }
+
+    function toggleCheckoutTab(tab) {
+        const pixBtn = document.getElementById('checkout-tab-pix');
+        const cardBtn = document.getElementById('checkout-tab-card');
+        const pixContent = document.getElementById('checkout-content-pix');
+        const cardContent = document.getElementById('checkout-content-card');
+        
+        if (tab === 'pix') {
+            pixBtn.className = "py-2.5 rounded-lg text-label-sm font-bold transition-all bg-primary-container text-white";
+            cardBtn.className = "py-2.5 rounded-lg text-label-sm font-bold transition-all text-on-surface-variant hover:text-on-surface";
+            pixContent.classList.remove('hidden');
+            cardContent.classList.add('hidden');
+        } else {
+            cardBtn.className = "py-2.5 rounded-lg text-label-sm font-bold transition-all bg-primary-container text-white";
+            pixBtn.className = "py-2.5 rounded-lg text-label-sm font-bold transition-all text-on-surface-variant hover:text-on-surface";
+            cardContent.classList.remove('hidden');
+            pixContent.classList.add('hidden');
+        }
+    }
+
+    function copyPixKey() {
+        const input = document.getElementById('pix-copy-input');
+        input.select();
+        document.execCommand('copy');
+        alert('Chave Pix Copia e Cola copiada com sucesso!');
+    }
+
+    function completePremiumPayment(method) {
+        let user = JSON.parse(localStorage.getItem('streamflix_user'));
+        if (!user) return;
+        
+        user.status = 'premium';
+        localStorage.setItem('streamflix_user', JSON.stringify(user));
+        
+        // Update user status in global list
+        let allUsers = JSON.parse(localStorage.getItem('streamflix_all_users')) || [];
+        const uIndex = allUsers.findIndex(u => u.email === user.email);
+        if (uIndex > -1) {
+            allUsers[uIndex].status = 'premium';
+            localStorage.setItem('streamflix_all_users', JSON.stringify(allUsers));
+        }
+        
+        closeCheckout();
+        checkUserLogin();
+        showPremiumWelcomeToast(user.name);
+    }
+
+    function showPremiumWelcomeToast(name) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-6 right-6 z-[130] bg-[#facc15] text-black px-6 py-4 rounded-xl border border-white/10 shadow-2xl flex items-center gap-3 backdrop-blur-md transition-all duration-500 ease-out translate-y-12 opacity-0';
+        toast.innerHTML = `
+            <span class="material-symbols-outlined select-none text-2xl animate-bounce">workspace_premium</span>
+            <div>
+                <p class="text-label-md font-bold leading-none">Upgrade Premium Concluído!</p>
+                <p class="text-xs text-black/80 mt-1">Parabéns, ${name}! Agora você tem STREAMFLIX sem anúncios.</p>
+            </div>
+        `;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.classList.remove('translate-y-12', 'opacity-0'), 100);
+        setTimeout(() => {
+            toast.classList.add('translate-y-12', 'opacity-0');
+            setTimeout(() => toast.remove(), 500);
+        }, 5000);
+    }
+
+    // =====================================================
+    // ADMINISTRATOR PORTAL LOGIC
+    // =====================================================
+    function toggleAdminLoginForm(show) {
+        const authTabs = document.getElementById('auth-tabs');
+        const formLogin = document.getElementById('auth-login-form');
+        const formRegister = document.getElementById('auth-register-form');
+        const adminForm = document.getElementById('admin-login-form');
+        
+        if (show) {
+            authTabs.classList.add('hidden');
+            formLogin.classList.add('hidden');
+            formRegister.classList.add('hidden');
+            adminForm.classList.remove('hidden');
+        } else {
+            authTabs.classList.remove('hidden');
+            adminForm.classList.add('hidden');
+            toggleAuthTab('login');
+        }
+    }
+
+    function handleAdminLogin() {
+        const userIn = document.getElementById('admin-username');
+        const passIn = document.getElementById('admin-password');
+        const user = userIn.value.trim();
+        const pass = passIn.value.trim();
+        
+        if (user === 'admin' && pass === 'admin') {
+            const adminUser = {
+                name: 'Administrador',
+                email: 'admin@streamflix.com',
+                initial: 'A',
+                status: 'admin',
+                joined: new Date().toLocaleDateString('pt-BR')
+            };
+            
+            localStorage.setItem('streamflix_user', JSON.stringify(adminUser));
+            
+            // Add to global list
+            let allUsers = JSON.parse(localStorage.getItem('streamflix_all_users')) || [];
+            if (!allUsers.some(u => u.email === adminUser.email)) {
+                allUsers.push(adminUser);
+                localStorage.setItem('streamflix_all_users', JSON.stringify(allUsers));
+            }
+            
+            userIn.value = '';
+            passIn.value = '';
+            
+            toggleAdminLoginForm(false);
+            checkUserLogin();
+            
+            routeTo('admin');
+            showWelcomeToast('Administrador');
+        } else {
+            alert('Credenciais administrativas incorretas. Tente novamente.');
+        }
+    }
+
+    function logMovieAccess(film) {
+        if (!film) return;
+        const user = JSON.parse(localStorage.getItem('streamflix_user')) || { name: 'Visitante', email: 'guest@gmail.com' };
+        let logs = JSON.parse(localStorage.getItem('streamflix_views_log')) || [];
+        logs.push({
+            title: film.title,
+            type: film.type || 'movie',
+            user: user.name,
+            email: user.email,
+            timestamp: new Date().toLocaleString('pt-BR')
+        });
+        localStorage.setItem('streamflix_views_log', JSON.stringify(logs));
+    }
+
+    function loadAdminDashboard() {
+        const allUsers = JSON.parse(localStorage.getItem('streamflix_all_users')) || [];
+        const viewsLog = JSON.parse(localStorage.getItem('streamflix_views_log')) || [];
+        
+        // Calculate stats
+        const totalUsers = allUsers.length;
+        const totalAccesses = viewsLog.length;
+        const premiumUsers = allUsers.filter(u => u.status === 'premium').length;
+        const estimatedRevenue = premiumUsers * 5;
+        
+        // Set stats on dashboard
+        document.getElementById('admin-stat-users').innerText = totalUsers;
+        document.getElementById('admin-stat-accesses').innerText = totalAccesses;
+        document.getElementById('admin-stat-premium').innerText = premiumUsers;
+        document.getElementById('admin-stat-revenue').innerText = `R$ ${estimatedRevenue.toFixed(2).replace('.', ',')}`;
+        
+        // Render registered users
+        const usersTable = document.getElementById('admin-users-table');
+        usersTable.innerHTML = '';
+        if (allUsers.length === 0) {
+            usersTable.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-on-surface-variant">Nenhum usuário registrado.</td></tr>`;
+        } else {
+            allUsers.forEach(u => {
+                const planBadge = u.status === 'premium'
+                    ? `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#facc15]/20 text-[#facc15] border border-[#facc15]/30">Premium</span>`
+                    : u.status === 'admin'
+                        ? `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary-container/20 text-primary-container border border-primary-container/30">Admin</span>`
+                        : `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-surface-container-highest text-on-surface-variant">Grátis</span>`;
+                
+                usersTable.insertAdjacentHTML('beforeend', `
+                    <tr class="border-b border-surface-variant/5">
+                        <td class="py-3 truncate max-w-[120px]">${u.name}</td>
+                        <td class="py-3 truncate max-w-[150px]">${u.email}</td>
+                        <td class="py-3 text-center">${planBadge}</td>
+                        <td class="py-3 text-right text-xs text-on-surface-variant">${u.joined || '—'}</td>
+                    </tr>
+                `);
+            });
+        }
+        
+        // Render access logs
+        const logsTable = document.getElementById('admin-logs-table');
+        logsTable.innerHTML = '';
+        if (viewsLog.length === 0) {
+            logsTable.innerHTML = `<tr><td colspan="3" class="py-4 text-center text-on-surface-variant">Nenhum log de acesso disponível.</td></tr>`;
+        } else {
+            [...viewsLog].reverse().forEach(log => {
+                logsTable.insertAdjacentHTML('beforeend', `
+                    <tr class="border-b border-surface-variant/5">
+                        <td class="py-2.5 truncate max-w-[120px]">${log.user}</td>
+                        <td class="py-2.5 truncate max-w-[150px] text-primary-container font-semibold">${log.title}</td>
+                        <td class="py-2.5 text-right text-on-surface-variant">${log.timestamp}</td>
+                    </tr>
+                `);
+            });
+        }
+    }
+
+    // Run login check on DOMContentLoaded
+    window.addEventListener('DOMContentLoaded', () => {
+        checkUserLogin();
+    });
+</script>
+
+<!-- ================= GOOGLE USER LOGINS AND MODALS ================= -->
+<!-- Google Sign-In Screen (Overlay) -->
+<div id="google-login-screen" class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-2xl flex items-center justify-center p-4 transition-all duration-500">
+    <div class="w-full max-w-md bg-[#131313]/90 border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center text-center shadow-2xl relative overflow-hidden">
+        <!-- Ambient glows -->
+        <div class="absolute -top-24 -left-24 w-48 h-48 rounded-full bg-primary-container/20 blur-3xl"></div>
+        <div class="absolute -bottom-24 -right-24 w-48 h-48 rounded-full bg-[#38bdf8]/10 blur-3xl"></div>
+        
+        <h2 class="text-display-hero-mobile font-display-hero font-extrabold tracking-tighter text-primary-container mb-2 uppercase select-none cursor-pointer" onclick="toggleAdminLoginForm(false)">STREAMFLIX</h2>
+        <p class="text-body-md text-on-surface-variant mb-6 max-w-xs leading-relaxed">Assista aos melhores filmes e séries em alta fidelidade.</p>
+        
+        <!-- Tabs for Sign In / Sign Up -->
+        <div id="auth-tabs" class="grid grid-cols-2 gap-2 p-1 bg-surface-container rounded-xl mb-6 w-full select-none">
+            <button id="tab-login" onclick="toggleAuthTab('login')" class="py-2 rounded-lg text-xs font-bold transition-all bg-primary-container text-white">
+                Entrar
+            </button>
+            <button id="tab-register" onclick="toggleAuthTab('register')" class="py-2 rounded-lg text-xs font-bold transition-all text-on-surface-variant hover:text-on-surface">
+                Criar Conta
+            </button>
+        </div>
+
+        <!-- Custom Login Container -->
+        <form id="auth-login-form" onsubmit="handleCustomLogin(event)" class="w-full space-y-4 text-left">
+            <div>
+                <label class="text-xs text-on-surface-variant block mb-1 font-semibold">Endereço de E-mail</label>
+                <input required id="login-email" type="email" placeholder="seu-email@exemplo.com" class="w-full text-sm px-4 py-2.5 bg-surface-container border border-white/5 rounded-xl text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" />
+            </div>
+            <div>
+                <label class="text-xs text-on-surface-variant block mb-1 font-semibold">Senha</label>
+                <input required id="login-password" type="password" placeholder="••••••••" class="w-full text-sm px-4 py-2.5 bg-surface-container border border-white/5 rounded-xl text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" />
+            </div>
+            <button type="submit" class="w-full py-3 bg-primary-container text-white font-bold rounded-xl text-label-md active:scale-95 transition-all shadow-lg shadow-primary-container/20">
+                Acessar Plataforma
+            </button>
+            <p class="text-xs text-center text-on-surface-variant pt-2">
+                Ou acesse como <a href="javascript:void(0)" onclick="toggleAdminLoginForm(true)" class="text-primary-container font-bold hover:underline">Administrador</a>
+            </p>
+        </form>
+
+        <!-- Custom Register Container -->
+        <form id="auth-register-form" onsubmit="handleCustomRegister(event)" class="hidden w-full space-y-4 text-left">
+            <div>
+                <label class="text-xs text-on-surface-variant block mb-1 font-semibold">Nome Completo</label>
+                <input required id="register-name" type="text" placeholder="Seu Nome Completo" class="w-full text-sm px-4 py-2.5 bg-surface-container border border-white/5 rounded-xl text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" />
+            </div>
+            <div>
+                <label class="text-xs text-on-surface-variant block mb-1 font-semibold">Endereço de E-mail</label>
+                <input required id="register-email" type="email" placeholder="seu-email@exemplo.com" class="w-full text-sm px-4 py-2.5 bg-surface-container border border-white/5 rounded-xl text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" />
+            </div>
+            <div>
+                <label class="text-xs text-on-surface-variant block mb-1 font-semibold">Senha</label>
+                <input required id="register-password" type="password" placeholder="Mínimo 6 caracteres" minlength="6" class="w-full text-sm px-4 py-2.5 bg-surface-container border border-white/5 rounded-xl text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" />
+            </div>
+            <button type="submit" class="w-full py-3 bg-[#4ade80] text-black font-bold rounded-xl text-label-md active:scale-95 transition-all shadow-lg shadow-green-500/20">
+                Registrar e Acessar
+            </button>
+        </form>
+
+        <!-- Admin Login Form (Hidden by default) -->
+        <div id="admin-login-form" class="hidden w-full border-t border-white/10 pt-6 mt-4 text-left animate-fadeIn">
+            <p class="text-xs font-semibold text-primary-container mb-3 flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm select-none">admin_panel_settings</span>
+                Entrar como Administrador:
+            </p>
+            <div class="space-y-3">
+                <input id="admin-username" type="text" placeholder="Usuário" class="w-full text-sm px-4 py-2.5 bg-surface-container border border-white/5 rounded-xl text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" />
+                <input id="admin-password" type="password" placeholder="Senha" class="w-full text-sm px-4 py-2.5 bg-surface-container border border-white/5 rounded-xl text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" />
+                <div class="flex gap-2">
+                    <button onclick="handleAdminLogin()" class="flex-grow py-2.5 bg-primary-container text-white rounded-xl text-sm font-semibold hover:brightness-110 active:scale-95 transition-all">
+                        Entrar
+                    </button>
+                    <button onclick="toggleAdminLoginForm(false)" class="px-4 py-2.5 bg-surface-container-high text-on-surface rounded-xl text-sm font-semibold hover:bg-surface-container-highest active:scale-95 transition-all">
+                        Voltar
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <p class="text-[11px] text-on-surface-variant mt-6">Ao continuar, você concorda com os Termos de Uso e Política de Privacidade da STREAMFLIX.</p>
+    </div>
+</div>
+
+<!-- ================= PREMIUM MERCADO PAGO CHECKOUT ================= -->
+<div id="premium-checkout-modal" class="fixed inset-0 z-[120] hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4 transition-all duration-300">
+    <div class="w-full max-w-lg bg-[#131313] border border-white/10 rounded-2xl p-6 shadow-2xl relative text-left">
+        <!-- Close button -->
+        <button onclick="closeCheckout()" class="material-symbols-outlined absolute right-4 top-4 text-on-surface-variant hover:text-white transition-colors select-none text-xl">close</button>
+        
+        <div class="text-center mb-6">
+            <span class="bg-[#facc15]/10 text-[#facc15] px-3 py-1 rounded text-label-sm font-label-sm border border-[#facc15]/30 uppercase tracking-widest font-bold select-none">STREAMFLIX PREMIUM</span>
+            <h3 class="text-2xl font-bold text-on-surface mt-3">Adquira o Plano Sem Anúncios</h3>
+            <p class="text-label-sm text-on-surface-variant mt-1">Transmissão ilimitada em 4K sem anúncios por apenas R$ 5,00 (Pagamento Único).</p>
+        </div>
+        
+        <!-- Mercado Pago Checkout tabs (Pix / Credit Card) -->
+        <div class="grid grid-cols-2 gap-2 p-1 bg-surface-container rounded-xl mb-6">
+            <button id="checkout-tab-pix" onclick="toggleCheckoutTab('pix')" class="py-2.5 rounded-lg text-label-sm font-bold transition-all bg-primary-container text-white">
+                ⚡ Pix (Imediato)
+            </button>
+            <button id="checkout-tab-card" onclick="toggleCheckoutTab('card')" class="py-2.5 rounded-lg text-label-sm font-bold transition-all text-on-surface-variant hover:text-on-surface">
+                💳 Cartão de Crédito
+            </button>
+        </div>
+        
+        <!-- Pix content -->
+        <div id="checkout-content-pix" class="space-y-4 flex flex-col items-center text-center">
+            <p class="text-label-sm text-on-surface-variant">Escaneie o código Pix abaixo com o aplicativo do seu banco para ativar sua conta premium instantaneamente.</p>
+            
+            <div class="bg-white p-4 rounded-xl shadow-inner w-44 h-44 flex items-center justify-center relative select-none">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=mercadopago-streamflix-premium-5reais-checkout" alt="Pix QR Code" class="w-full h-full select-none" />
+            </div>
+            
+            <div class="w-full space-y-2">
+                <input readonly value="000201010212430014br.gov.bcb.pix2580mercadopago-test-checkout-5reais" id="pix-copy-input" class="w-full text-center text-xs px-3 py-2 bg-surface-container border border-white/5 rounded-md text-on-surface-variant focus:outline-none" />
+                <button onclick="copyPixKey()" class="px-6 py-2 bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded-xl text-label-sm font-semibold hover:scale-105 active:scale-95 transition-all w-full flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-base">content_copy</span>
+                    Copiar Código Copia e Cola
+                </button>
+            </div>
+            
+            <button onclick="completePremiumPayment('Pix')" class="w-full py-3 bg-[#4ade80] hover:bg-green-500 text-black font-bold rounded-xl text-label-md active:scale-95 transition-all shadow-lg shadow-green-500/20">
+                Confirmar Pagamento Simulado (Pix)
+            </button>
+        </div>
+        
+        <!-- Credit Card content -->
+        <div id="checkout-content-card" class="hidden space-y-4">
+            <div class="space-y-3">
+                <div>
+                    <label class="text-xs text-on-surface-variant font-semibold block mb-1">Número do Cartão (Mercado Pago Sandbox)</label>
+                    <input id="card-number" type="text" placeholder="0000 0000 0000 0000" class="w-full text-sm px-4 py-2.5 bg-surface-container border border-white/5 rounded-xl text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" />
+                </div>
+                <div>
+                    <label class="text-xs text-on-surface-variant font-semibold block mb-1">Nome Completo do Titular</label>
+                    <input id="card-name" type="text" placeholder="Nome como no cartão" class="w-full text-sm px-4 py-2.5 bg-surface-container border border-white/5 rounded-xl text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" />
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs text-on-surface-variant font-semibold block mb-1">Data de Expiração</label>
+                        <input id="card-expiry" type="text" placeholder="MM/AA" class="w-full text-sm px-4 py-2.5 bg-surface-container border border-white/5 rounded-xl text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" />
+                    </div>
+                    <div>
+                        <label class="text-xs text-on-surface-variant font-semibold block mb-1">Código de Segurança (CVV)</label>
+                        <input id="card-cvv" type="text" placeholder="123" class="w-full text-sm px-4 py-2.5 bg-surface-container border border-white/5 rounded-xl text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-between text-xs text-on-surface-variant pt-2">
+                <span>Segurança Garantida por Mercado Pago</span>
+                <span class="text-primary-container font-bold">Checkout Sandbox</span>
+            </div>
+            
+            <button onclick="completePremiumPayment('Cartão de Crédito')" class="w-full py-3 bg-[#009EE3] hover:bg-[#0087c3] text-white font-bold rounded-xl text-label-md active:scale-95 transition-all shadow-lg shadow-[#009EE3]/20">
+                Pagar R$ 5,00 com Mercado Pago
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MOBILE BOTTOM NAV ===== -->
+<nav id="bottom-nav" aria-label="Navegação principal">
+    <button class="bn-item active" id="bn-home" onclick="routeTo('home')" aria-label="Início">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">home</span>
+        <span class="bn-label">Início</span>
+    </button>
+    <button class="bn-item" id="bn-catalog" onclick="routeTo('catalog')" aria-label="Catálogo">
+        <span class="material-symbols-outlined">movie</span>
+        <span class="bn-label">Catálogo</span>
+    </button>
+    <button class="bn-item" id="bn-search" onclick="openMobileSearch()" aria-label="Buscar">
+        <span class="material-symbols-outlined">search</span>
+        <span class="bn-label">Buscar</span>
+    </button>
+    <button class="bn-item" id="bn-mylist" onclick="routeTo('mylist')" aria-label="Minha Lista">
+        <span class="material-symbols-outlined">favorite_border</span>
+        <span class="bn-label">Minha Lista</span>
+    </button>
+    <button class="bn-item" id="bn-profile" onclick="toggleUserMenu(event)" aria-label="Perfil">
+        <span class="material-symbols-outlined">person</span>
+        <span class="bn-label">Perfil</span>
+    </button>
+</nav>
+
+<script>
+function openMobileSearch() {
+    routeTo('catalog');
+    setTimeout(() => {
+        const inp = document.getElementById('mobile-search-input');
+        if (inp) { inp.focus(); inp.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    }, 150);
+}
+</script>
+</body>
+</html>

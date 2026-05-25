@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>STREAMFLIX - Design System Explorer</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "outline-variant": "#5e3f3b",
+              "on-secondary": "#2f3131",
+              "inverse-surface": "#e5e2e1",
+              "on-background": "#e5e2e1",
+              "on-tertiary-fixed": "#1b1c1c",
+              "surface-container-low": "#1c1b1b",
+              "error-container": "#93000a",
+              "primary-container": "#e50914",
+              "on-error": "#690005",
+              "tertiary": "#c8c6c6",
+              "surface-container": "#201f1f",
+              "surface-container-high": "#2a2a2a",
+              "inverse-primary": "#c0000c",
+              "surface": "#131313",
+              "tertiary-fixed-dim": "#c8c6c6",
+              "secondary-fixed": "#e2e2e2",
+              "on-tertiary": "#303030",
+              "on-primary-fixed": "#410001",
+              "inverse-on-surface": "#313030",
+              "primary": "#ffb4aa",
+              "on-primary": "#690003",
+              "surface-bright": "#393939",
+              "on-tertiary-fixed-variant": "#474747",
+              "on-secondary-container": "#b4b5b5",
+              "secondary-container": "#454747",
+              "on-tertiary-container": "#fbf8f8",
+              "surface-tint": "#ffb4aa",
+              "primary-fixed": "#ffdad5",
+              "on-primary-container": "#fff7f6",
+              "surface-container-lowest": "#0e0e0e",
+              "surface-variant": "#353534",
+              "error": "#ffb4ab",
+              "on-secondary-fixed-variant": "#454747",
+              "secondary": "#c6c6c7",
+              "secondary-fixed-dim": "#c6c6c7",
+              "tertiary-container": "#737272",
+              "background": "#131313",
+              "surface-dim": "#131313",
+              "on-secondary-fixed": "#1a1c1c",
+              "on-error-container": "#ffdad6",
+              "tertiary-fixed": "#e4e2e2",
+              "surface-container-highest": "#353534",
+              "on-surface-variant": "#e9bcb6",
+              "primary-fixed-dim": "#ffb4aa",
+              "outline": "#af8782",
+              "on-primary-fixed-variant": "#930007",
+              "on-surface": "#e5e2e1"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+            },
+            "spacing": {
+              "stack-gap-sm": "8px",
+              "gutter": "12px",
+              "edge-margin-desktop": "60px",
+              "container-max": "1440px",
+              "stack-gap-lg": "48px",
+              "edge-margin-mobile": "16px",
+              "edge-margin-tablet": "32px",
+              "stack-gap-md": "24px"
+            },
+            "fontFamily": {
+              "label-md": ["Inter"],
+              "label-sm": ["Inter"],
+              "headline-md": ["Montserrat"],
+              "display-hero-mobile": ["Montserrat"],
+              "body-md": ["Inter"],
+              "headline-lg": ["Montserrat"],
+              "display-hero": ["Montserrat"],
+              "headline-lg-mobile": ["Montserrat"],
+              "body-lg": ["Inter"]
+            },
+            "fontSize": {
+              "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+              "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+              "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+              "display-hero-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "800"}],
+              "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+              "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+              "display-hero": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+              "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+              "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #e5e2e1;
+            -webkit-font-smoothing: antialiased;
+        }
+        .nav-glass {
+            background-color: rgba(19, 19, 19, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+        }
+        .token-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+        .token-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(229,9,20,0.3);
+            transform: translateY(-2px);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0e0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #353534;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e50914;
+        }
+    </style>
+</head>
+<body class="selection:bg-primary-container selection:text-white font-body-md">
+
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 nav-glass flex justify-between items-center px-edge-margin-mobile md:px-edge-margin-desktop py-4" id="top-app-bar">
+    <div class="flex items-center gap-12">
+        <h1 onclick="window.location.href='./index.html'" class="text-headline-md font-headline-md font-extrabold tracking-tighter text-primary-container cursor-pointer select-none">STREAMFLIX</h1>
+        <nav class="hidden md:flex items-center gap-6">
+            <a class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="./index.html">Início</a>
+            <a class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="./index.html">Catálogo</a>
+            <a class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="./index.html">Minha Lista</a>
+            <a class="text-label-md font-label-md text-on-surface border-b-2 border-primary-container pb-1" href="javascript:void(0)">Design System</a>
+        </nav>
+    </div>
+    <div class="flex items-center gap-6">
+        <button class="material-symbols-outlined text-on-surface hover:scale-110 transition-transform" onclick="window.location.href='./index.html'">arrow_back</button>
+        <span class="text-label-sm font-label-sm text-on-surface-variant hidden sm:inline">Modo Desenvolvedor</span>
+    </div>
+</header>
+
+<main class="min-h-screen pt-28 pb-16">
+    <section class="max-w-container-max mx-auto px-edge-margin-mobile md:px-edge-margin-desktop space-y-12">
+        
+        <!-- Header -->
+        <div>
+            <h1 class="text-headline-lg font-headline-lg font-extrabold tracking-tight mb-2">STREAMFLIX Design System</h1>
+            <p class="text-body-md text-on-secondary-container max-w-2xl">
+                Especificação visual e guia de estilo extraídos das telas originais geradas pelo Google Stitch. Este ecossistema foi projetado para evocar uma atmosfera de cinema escuro premium e imersiva.
+            </p>
+        </div>
+
+        <hr class="border-surface-variant/30"/>
+
+        <!-- 1. CORES -->
+        <div>
+            <h2 class="text-headline-md font-headline-md font-bold mb-6 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container">palette</span>
+                Paleta de Cores (Tokens)
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                
+                <!-- Color 1 -->
+                <div class="token-card rounded-xl p-4 flex flex-col gap-3">
+                    <div class="w-full h-16 rounded-lg bg-[#e50914] shadow-md"></div>
+                    <div>
+                        <p class="text-label-md font-semibold font-headline-md">primary-container</p>
+                        <p class="text-label-sm text-on-surface-variant font-mono">#e50914</p>
+                        <p class="text-xs text-on-secondary-container mt-1">Vermelho Streamflix / Destaques</p>
+                    </div>
+                </div>
+
+                <!-- Color 2 -->
+                <div class="token-card rounded-xl p-4 flex flex-col gap-3">
+                    <div class="w-full h-16 rounded-lg bg-[#131313] border border-surface-variant/20 shadow-md"></div>
+                    <div>
+                        <p class="text-label-md font-semibold font-headline-md">surface</p>
+                        <p class="text-label-sm text-on-surface-variant font-mono">#131313</p>
+                        <p class="text-xs text-on-secondary-container mt-1">Fundo das seções e cards</p>
+                    </div>
+                </div>
+
+                <!-- Color 3 -->
+                <div class="token-card rounded-xl p-4 flex flex-col gap-3">
+                    <div class="w-full h-16 rounded-lg bg-[#0e0e0e] border border-surface-variant/20 shadow-md"></div>
+                    <div>
+                        <p class="text-label-md font-semibold font-headline-md">surface-lowest</p>
+                        <p class="text-label-sm text-on-surface-variant font-mono">#0e0e0e</p>
+                        <p class="text-xs text-on-secondary-container mt-1">Fundo do footer e barras</p>
+                    </div>
+                </div>
+
+                <!-- Color 4 -->
+                <div class="token-card rounded-xl p-4 flex flex-col gap-3">
+                    <div class="w-full h-16 rounded-lg bg-[#201f1f] shadow-md"></div>
+                    <div>
+                        <p class="text-label-md font-semibold font-headline-md">surface-container</p>
+                        <p class="text-label-sm text-on-surface-variant font-mono">#201f1f</p>
+                        <p class="text-xs text-on-secondary-container mt-1">Recipientes e fundos de inputs</p>
+                    </div>
+                </div>
+
+                <!-- Color 5 -->
+                <div class="token-card rounded-xl p-4 flex flex-col gap-3">
+                    <div class="w-full h-16 rounded-lg bg-[#e5e2e1] shadow-md"></div>
+                    <div>
+                        <p class="text-label-md font-semibold font-headline-md">on-surface</p>
+                        <p class="text-label-sm text-on-surface-variant font-mono">#e5e2e1</p>
+                        <p class="text-xs text-on-secondary-container mt-1">Texto principal claro</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. TIPOGRAFIA -->
+        <div>
+            <h2 class="text-headline-md font-headline-md font-bold mb-6 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container">text_fields</span>
+                Tipografia e Famílias
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Montserrat -->
+                <div class="token-card rounded-xl p-6 space-y-4">
+                    <h3 class="text-headline-md font-headline-md font-extrabold text-primary-container tracking-wide">Montserrat</h3>
+                    <p class="text-label-sm text-on-surface-variant">Utilizada em títulos de hero, seções, cabeçalhos de destaque e chamadas principais.</p>
+                    <div class="space-y-2 border-t border-surface-variant/20 pt-4">
+                        <p class="text-display-hero-mobile font-display-hero font-bold tracking-tight">Display Hero (56px)</p>
+                        <p class="text-headline-lg font-headline-lg font-bold">Headline Large (32px)</p>
+                        <p class="text-headline-md font-headline-md font-bold">Headline Medium (24px)</p>
+                    </div>
+                </div>
+
+                <!-- Inter -->
+                <div class="token-card rounded-xl p-6 space-y-4">
+                    <h3 class="text-headline-md font-semibold text-white">Inter</h3>
+                    <p class="text-label-sm text-on-surface-variant">Utilizada em corpos de texto, descrições sinópticas, labels de formulários e botões.</p>
+                    <div class="space-y-4 border-t border-surface-variant/20 pt-4">
+                        <div>
+                            <p class="text-body-lg font-body-lg">Body Large (18px)</p>
+                            <p class="text-sm text-on-surface-variant">Sinopse de filmes com espaçamento de linha relaxado.</p>
+                        </div>
+                        <div>
+                            <p class="text-body-md font-body-md">Body Medium (16px)</p>
+                            <p class="text-sm text-on-surface-variant">Textos gerais de navegação e parágrafos normais.</p>
+                        </div>
+                        <div>
+                            <p class="text-label-md font-label-md">Label Medium (14px, Letter Spacing 0.05em, Semi-Bold)</p>
+                            <p class="text-sm text-on-surface-variant">Tags de gêneros, cabeçalhos de tabelas e botões secundários.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. COMPONENTES INTERATIVOS -->
+        <div>
+            <h2 class="text-headline-md font-headline-md font-bold mb-6 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container">widgets</span>
+                Elementos e Componentes UI
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Buttons Card -->
+                <div class="token-card rounded-xl p-6 space-y-4">
+                    <h3 class="text-label-md font-bold uppercase tracking-widest text-on-surface-variant">Botões</h3>
+                    <div class="space-y-3 pt-2">
+                        <div>
+                            <span class="text-xs text-on-surface-variant block mb-1">Primary (Assistir)</span>
+                            <button class="bg-[#e50914] text-white px-6 py-2.5 rounded-lg flex items-center gap-2 font-semibold hover:scale-105 active:scale-95 transition-all text-sm shadow-md">
+                                <span class="material-symbols-outlined text-base">play_arrow</span> Play
+                            </button>
+                        </div>
+                        <div>
+                            <span class="text-xs text-on-surface-variant block mb-1">Secondary / Glassmorphic</span>
+                            <button class="bg-white/10 backdrop-blur-md text-on-surface px-6 py-2.5 rounded-lg flex items-center gap-2 border border-white/10 hover:bg-white/20 active:scale-95 transition-all text-sm">
+                                <span class="material-symbols-outlined text-base">add</span> Adicionar Lista
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Card -->
+                <div class="token-card rounded-xl p-6 space-y-4">
+                    <h3 class="text-label-md font-bold uppercase tracking-widest text-on-surface-variant">Inputs e Formulários</h3>
+                    <div class="space-y-4 pt-2">
+                        <div>
+                            <span class="text-xs text-on-surface-variant block mb-1">Search Glass Input</span>
+                            <div class="relative">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-base select-none">search</span>
+                                <input class="w-full bg-white/7 backdrop-blur-md border border-white/10 pl-9 pr-4 py-2 rounded-lg text-xs font-semibold focus:border-b-2 focus:border-[#e50914] focus:outline-none" placeholder="Pesquisar..." type="text"/>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs text-on-surface-variant block mb-1">Custom Select Dropdown</span>
+                            <select class="w-full bg-[#2a2a2a] text-xs font-semibold px-4 py-2 rounded-full border-none focus:ring-1 focus:ring-[#e50914] cursor-pointer">
+                                <option>Opção do Filtro</option>
+                                <option>Ficção Científica</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Borders & Spacing Card -->
+                <div class="token-card rounded-xl p-6 space-y-4">
+                    <h3 class="text-label-md font-bold uppercase tracking-widest text-on-surface-variant">Arredondamento & Bordas</h3>
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-on-surface-variant font-mono">border-radius: lg (4px)</span>
+                            <div class="w-16 h-8 bg-primary-container rounded-[0.25rem] flex items-center justify-center text-xs font-bold text-white">4px</div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-on-surface-variant font-mono">border-radius: xl (8px)</span>
+                            <div class="w-16 h-8 bg-[#2a2a2a] border border-surface-variant/20 rounded-[0.5rem] flex items-center justify-center text-xs font-bold text-white">8px</div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-on-surface-variant font-mono">border-radius: full (12px)</span>
+                            <div class="w-16 h-8 bg-surface-container rounded-[0.75rem] flex items-center justify-center text-xs font-bold text-white">12px</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-surface-variant py-8 text-center text-on-secondary-container">
+    <div class="max-w-container-max mx-auto px-edge-margin-mobile md:px-edge-margin-desktop flex justify-between items-center text-xs">
+        <span>© 2026 STREAMFLIX Design Token Specification</span>
+        <button onclick="window.location.href='./index.html'" class="px-4 py-1.5 bg-[#e50914] text-white rounded-lg font-semibold hover:scale-105 active:scale-95 transition-all flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs select-none">home</span> Voltar à Streamflix
+        </button>
+    </div>
+</footer>
+
+</body>
+</html>
