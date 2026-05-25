@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "node inject-env.js",
+    "build": "echo \"TMDB_API_KEY=$TMDB_API_KEY\" > .env && node inject-env.js",
     "dev":   "node inject-env.js --watch",
     "start": "node inject-env.js && npx serve dist"
   },
